@@ -1,0 +1,57 @@
+Index: rpm-4.9.0/configure.ac
+===================================================================
+--- rpm-4.9.0.orig/configure.ac
++++ rpm-4.9.0/configure.ac
+@@ -831,6 +831,7 @@ unknown|pc|ibm|redhat|pld|mandrake|conec
+ 	test -f /etc/redhat-release &&		RPMCANONVENDOR=redhat
+ 	test -f /etc/SuSE-release &&		RPMCANONVENDOR=suse
+ 	test -f /etc/pld-release &&		RPMCANONVENDOR=pld
++	test -f /etc/meego-release &&		RPMCANONVENDOR=meego
+ 	test -f /etc/mandrake-release &&	RPMCANONVENDOR=mandrake
+ 	test -f /etc/conectiva-release &&	RPMCANONVENDOR=conectiva
+ 	test -f /etc/lvr-release &&		RPMCANONVENDOR=lvr
+Index: rpm-4.9.0/platform.in
+===================================================================
+--- rpm-4.9.0.orig/platform.in
++++ rpm-4.9.0/platform.in
+@@ -76,6 +76,26 @@
+ @redhat@#%defattr(-,root,root,-)\
+ @redhat@#%{nil}
+ 
++@meego@#---------------------------------------------------------------------
++@meego@#	Expanded at end of %prep
++@meego@#
++@meego@%__id_u		@__ID_U@
++@meego@%__chown_Rhf	@__CHOWN_RHF@
++@meego@%__chgrp_Rhf	@__CHGRP_RHF@
++@meego@%_fixperms	%{__chmod} -Rf @FIXPERMS@
++@meego@%__os_install_post    \
++@meego@    %{_rpmconfigdir}/brp-compress \
++@meego@    %{_rpmconfigdir}/brp-strip %{__strip} \
++@meego@    %{_rpmconfigdir}/brp-strip-static-archive %{__strip} \
++@meego@    %{_rpmconfigdir}/brp-strip-comment-note %{__strip} %{__objdump} \
++@meego@    %{_rpmconfigdir}/meego/find-docs.sh %{buildroot}\
++@meego@%{nil}
++@meego@#---------------------------------------------------------------------
++@meego@#	Always use %defattr(-,root,root) in %files (added in rpm-4.0.4)
++@meego@#
++@meego@#%files(n:f:)	%%files%{?-f: -f %{-f*}}%{?-n: -n %{-n*}} %{?1}\
++@meego@#%defattr(-,root,root,-)\
++@meego@#%{nil}
+ 
+ @apple@#---------------------------------------------------------------------
+ @apple@#	Apple Darwin vendor specific macros
+Index: rpm-4.9.0/installplatform
+===================================================================
+--- rpm-4.9.0.orig/installplatform
++++ rpm-4.9.0/installplatform
+@@ -126,6 +126,9 @@ for SUBST in $SUBSTS ; do
+   redhat)
+     VENDORSED='-e s,^@redhat@,,'
+     ;;
++  meego)
++    VENDORSED='-e s,^@meego@,,'
++    ;;
+   apple)
+     VENDORSED='-e s,^@apple@,,'
+     ;;
