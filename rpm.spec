@@ -19,6 +19,8 @@ Patch7: rpm-4.9.0-meego-arm.patch
 Patch8: debugsource.patch
 Patch10: remove-translations.patch
 Patch11: rpm-shorten-changelog.patch
+Patch12: rpm-4.7.1-mips64el.patch
+Patch13: rpm-4.9.0-nofsync.patch
 
 # Partially GPL/LGPL dual-licensed and some bits with BSD
 # SourceLicense: (GPLv2+ and LGPLv2+ with exceptions) and BSD 
@@ -117,6 +119,8 @@ that will manipulate RPM packages and databases.
 %patch8 -p1
 %patch10 -p1
 %patch11 -p1
+%patch12 -p1
+%patch13 -p1 
 
 %build
 CPPFLAGS="$CPPFLAGS `pkg-config --cflags nss`"

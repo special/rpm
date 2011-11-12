@@ -1,3 +1,11 @@
+* Sun Nov 13 2011 Carsten Munk <carsten@maemo.org> - 4.9.0
+- Add nofsync, it's murder on mobile devices and in obs
+  chroot setup
+
+* Sat Nov 12 2011 Carsten Munk <carsten@maemo.org> - 4.9.0
+- Add rpm-4.7.1-mips64el.patch to make mips build set proper
+  isa_bits etc.
+
 * Fri May 27 2011 Anas Nashif <anas.nashif@intel.com> - 4.9.0
 - Refine script for splitting documentation
 

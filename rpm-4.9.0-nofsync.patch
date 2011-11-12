@@ -1,0 +1,13 @@
+diff -ru rpm-4.9.0/macros.in rpm-4.9.0-nofsync/macros.in
+--- rpm-4.9.0/macros.in	2011-01-03 14:57:41.000000000 +0100
++++ rpm-4.9.0-nofsync/macros.in	2011-11-13 17:22:22.184890504 +0100
+@@ -535,7 +535,7 @@
+ # Misc BDB tuning options
+ %__dbi_other			mp_mmapsize=128Mb mp_size=64Mb
+ 
+-%_dbi_config			%{?__dbi_other}
++%_dbi_config			%{?__dbi_other} nofsync
+ 
+ # "Packages" should have shared/exclusive fcntl(2) lock using "lockdbfd".
+ %_dbi_config_Packages		%{?_dbi_config} lockdbfd
+Only in rpm-4.9.0-nofsync: macros.in~

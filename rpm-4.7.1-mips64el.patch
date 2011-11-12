@@ -1,0 +1,22 @@
+--- rpm-4.8.0/installplatform.orig	2010-05-27 21:33:57.623739839 +0800
++++ rpm-4.8.0/installplatform	2010-05-27 21:35:40.463736556 +0800
+@@ -50,6 +50,7 @@
+     s390x-linux) LIB=lib64 ;;
+     ppc64-linux|powerpc64-linux) LIB=lib64 ;;
+     x86_64-linux|amd64-linux|ia32e-linux) LIB=lib64 ;;
++    mips*-linux) LIB=lib ;;
+     *) LIB=lib;;
+   esac
+ 
+@@ -113,6 +113,11 @@
+ 	ISANAME=alpha
+ 	ISABITS=64
+ 	;;
++    mips*)
++	# We assume N32 first
++	ISANAME=mips
++	ISABITS=32
++	;;
+   esac
+ 
+   case $VENDOR in
