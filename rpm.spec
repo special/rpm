@@ -3,7 +3,7 @@
 
 Summary: The RPM package management system
 Name: rpm
-Version: 4.9.0
+Version: 4.9.1.2
 Release: 1
 Source0: http://rpm.org/releases/rpm-4.9.x/rpm-%{version}.tar.bz2
 Source1: libsymlink.attr

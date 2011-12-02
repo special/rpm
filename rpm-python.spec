@@ -9,7 +9,7 @@
 
 %define rpmhome /usr/lib/rpm
 
-%define rpmver 4.9.0
+%define rpmver 4.9.1.2
 
 
 Summary: The RPM package management system

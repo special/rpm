@@ -1,3 +1,7 @@
+* Fri Dec 02 2011 Carsten Munk <carsten@maemo.org> - 4.9.1.2
+- Upgrade to 4.9.1.2, fixes some problems with defattr for 
+  directories.
+
 * Sun Nov 13 2011 Carsten Munk <carsten@maemo.org> - 4.9.0
 - Add nofsync, it's murder on mobile devices and in obs
   chroot setup
