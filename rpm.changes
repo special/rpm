@@ -1,3 +1,6 @@
+* Fri Apr 20 2012 Carsten Munk <carsten@merproject.org> - 4.9.1.2
+- Add rpm-4.9.x-elfattr.patch which solves elfdeps of setuid binaries 
+
 * Fri Dec 02 2011 Carsten Munk <carsten@maemo.org> - 4.9.1.2
 - Upgrade to 4.9.1.2, fixes some problems with defattr for 
   directories.
