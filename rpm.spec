@@ -10,18 +10,16 @@ Source1: libsymlink.attr
 Group: System/Base
 Url: http://www.rpm.org/
 
-Patch2: rpm-4.7.90-devel-autodep.patch
-Patch3: rpm-4.5.90-pkgconfig-path.patch
-Patch4: rpm-4.5.90-gstreamer-provides.patch
-Patch5: rpm-4.8.0-tilde.patch
-Patch6: rpm-macros.patch
-Patch7: rpm-4.9.0-meego-arm.patch
-Patch8: debugsource.patch
-Patch10: remove-translations.patch
-Patch11: rpm-shorten-changelog.patch
-Patch12: rpm-4.7.1-mips64el.patch
-Patch13: rpm-4.9.0-nofsync.patch
-Patch14: rpm-4.9.x-elfattr.patch
+Patch1: 0001-rpm-4.5.90-pkgconfig-path.patch
+Patch2: 0002-rpm-4.8.0-tilde.patch
+Patch3: 0003-rpm-macros.patch
+Patch4: 0004-rpm-4.9.0-meego-arm.patch
+Patch5: 0005-debugsource.patch
+Patch6: 0006-rpm-shorten-changelog.patch
+Patch7: 0007-rpm-4.7.1-mips64el.patch
+Patch8: 0008-rpm-4.9.0-nofsync.patch
+Patch9: 0009-rpm-4.9.x-elfattr.patch
+Patch10: 0010-rpm-4.9.1.2-skipprep.patch
 
 # Partially GPL/LGPL dual-licensed and some bits with BSD
 # SourceLicense: (GPLv2+ and LGPLv2+ with exceptions) and BSD 
@@ -111,18 +109,16 @@ that will manipulate RPM packages and databases.
 
 %prep
 %setup -q  -n rpm-%{version}
-#%patch2 -p1 -b .devel-autodep
-%patch3 -p1 -b .pkgconfig-path
-#%patch4 -p1 -b .gstreamer-prov
-%patch5 -p1 -b .tilde
-%patch6 -p1 -b .vendor
-%patch7 -p1 -b .arm
+%patch1 -p1
+%patch2 -p1
+%patch3 -p1
+%patch4 -p1
+%patch5 -p1
+%patch6 -p1
+%patch7 -p1
 %patch8 -p1
+%patch9 -p1
 %patch10 -p1
-%patch11 -p1
-%patch12 -p1
-%patch13 -p1 
-%patch14 -p1
 
 %build
 CPPFLAGS="$CPPFLAGS `pkg-config --cflags nss`"

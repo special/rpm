@@ -1,3 +1,8 @@
+* Fri Jul 27 2012 David Greaves <david@dgreaves.com> - 4.9.1.2-3
+ - Add 0010-rpm-4.9.1.2-skipprepclean.patch to support quickbuild
+   using --skip-prep and --skip-clean options
+ - Rewrite patches based on preliminary git packaging work
+
 * Fri Apr 20 2012 Carsten Munk <carsten@merproject.org> - 4.9.1.2
 - Add rpm-4.9.x-elfattr.patch which solves elfdeps of setuid binaries 
 

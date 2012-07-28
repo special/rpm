@@ -1,8 +1,33 @@
-Index: rpm-4.9.0/macros.in
-===================================================================
---- rpm-4.9.0.orig/macros.in
-+++ rpm-4.9.0/macros.in
-@@ -1032,7 +1032,7 @@ done \
+From 7a24ab27f2ffa32e4896495506c994a201fe935d Mon Sep 17 00:00:00 2001
+From: David Greaves <david@dgreaves.com>
+Date: Mon, 25 Jun 2012 23:57:04 +0100
+Subject: [PATCH] rpm-4.9.0-meego-arm
+
+---
+ installplatform |    3 ++-
+ macros.in       |    2 +-
+ rpmrc.in        |   22 ++++++++++++++++++++++
+ 3 files changed, 25 insertions(+), 2 deletions(-)
+
+diff --git a/installplatform b/installplatform
+index 09952f0..a1128ba 100755
+--- a/installplatform
++++ b/installplatform
+@@ -19,7 +19,8 @@ RPMRC_GNU="`$RPM --eval '%{_gnu}'`"
+ case "$arch" in
+   i[3456]86|pentium[34]|athlon|geode) SUBSTS='s_i386_i386_ s_i386_i486_ s_i386_i586_ s_i386_i686_ s_i386_pentium3_ s_i386_pentium4_ s_i386_athlon_ s_i386_geode_' ;;
+   alpha*) SUBSTS='s_alpha_alpha_ s_alpha_alphaev5_ s_alpha_alphaev56_ s_alpha_alphapca56_ s_alpha_alphaev6_ s_alpha_alphaev67_' ;;
+-  arm*) SUBSTS='s_arm_arm_ s_arm_armv3l_ s_arm_armv4l_ s_arm_armv4tl_ s_arm_armv5tel_ s_arm_armv5tejl_ s_arm_armv6l_ s_arm_armv7l_' ;;
++  arm*) SUBSTS='s_arm_arm_ s_arm_armv3l_ s_arm_armv4l_ s_arm_armv4tl_ s_arm_armv5tel_ s_arm_armv5tejl_ s_arm_armv6l_ s_arm_armv7l_ s_arm_armv7hl_ s_arm_armv7nhl_ s_arm_armv7tnhl
++   _ s_arm_armv7thl_' ;;
+   sh4*) SUBSTS='s_sh4_sh4_ s_sh4_sh4a_' ;;
+   sparc*) SUBSTS='s_sparc\(64\|64v\|v9v\|v9\)_sparc_ s_sparc64_sparcv9_;s_sparc\([^v]\|$\)_sparcv9\1_ s_sparcv9_sparc64_;s_sparc\([^6]\|$\)_sparc64\1_' ;;
+   powerpc*|ppc*) SUBSTS='s_ppc64_ppc_ s_ppc\([^6ip]\|$\)_ppc64\1_ s_ppc\([^6ip]\|$\)_ppciseries_ s_ppc\([^6ip]\|$\)_ppcpseries_ s_ppc\([^6ip]\|$\)_ppc64iseries_ s_ppc\([^6ip]\|$\)_ppc64pseries_' ;;
+diff --git a/macros.in b/macros.in
+index 2e67e64..e8b359b 100644
+--- a/macros.in
++++ b/macros.in
+@@ -1034,7 +1034,7 @@ done \
  
  #------------------------------------------------------------------------------
  # arch macro for all supported ARM processors
@@ -11,10 +36,10 @@ Index: rpm-4.9.0/macros.in
  
  #------------------------------------------------------------------------------
  # arch macro for all supported Sparc processors
-Index: rpm-4.9.0/rpmrc.in
-===================================================================
---- rpm-4.9.0.orig/rpmrc.in
-+++ rpm-4.9.0/rpmrc.in
+diff --git a/rpmrc.in b/rpmrc.in
+index 0033bbd..9f1eaca 100644
+--- a/rpmrc.in
++++ b/rpmrc.in
 @@ -66,6 +66,10 @@ optflags: armv5tel -O2 -g -march=armv5te
  optflags: armv5tejl -O2 -g -march=armv5te
  optflags: armv6l -O2 -g -march=armv6
@@ -72,17 +97,6 @@ Index: rpm-4.9.0/rpmrc.in
  buildarch_compat: hppa2.0: hppa1.2
  buildarch_compat: hppa1.2: hppa1.1
  buildarch_compat: hppa1.1: hppa1.0
-Index: rpm-4.9.0/installplatform
-===================================================================
---- rpm-4.9.0.orig/installplatform
-+++ rpm-4.9.0/installplatform
-@@ -19,7 +19,8 @@ RPMRC_GNU="`$RPM --eval '%{_gnu}'`"
- case "$arch" in
-   i[3456]86|pentium[34]|athlon|geode) SUBSTS='s_i386_i386_ s_i386_i486_ s_i386_i586_ s_i386_i686_ s_i386_pentium3_ s_i386_pentium4_ s_i386_athlon_ s_i386_geode_' ;;
-   alpha*) SUBSTS='s_alpha_alpha_ s_alpha_alphaev5_ s_alpha_alphaev56_ s_alpha_alphapca56_ s_alpha_alphaev6_ s_alpha_alphaev67_' ;;
--  arm*) SUBSTS='s_arm_arm_ s_arm_armv3l_ s_arm_armv4l_ s_arm_armv4tl_ s_arm_armv5tel_ s_arm_armv5tejl_ s_arm_armv6l_ s_arm_armv7l_' ;;
-+  arm*) SUBSTS='s_arm_arm_ s_arm_armv3l_ s_arm_armv4l_ s_arm_armv4tl_ s_arm_armv5tel_ s_arm_armv5tejl_ s_arm_armv6l_ s_arm_armv7l_ s_arm_armv7hl_ s_arm_armv7nhl_ s_arm_armv7tnhl
-+   _ s_arm_armv7thl_' ;;
-   sh4*) SUBSTS='s_sh4_sh4_ s_sh4_sh4a_' ;;
-   sparc*) SUBSTS='s_sparc\(64\|64v\|v9v\|v9\)_sparc_ s_sparc64_sparcv9_;s_sparc\([^v]\|$\)_sparcv9\1_ s_sparcv9_sparc64_;s_sparc\([^6]\|$\)_sparc64\1_' ;;
-   powerpc*|ppc*) SUBSTS='s_ppc64_ppc_ s_ppc\([^6ip]\|$\)_ppc64\1_ s_ppc\([^6ip]\|$\)_ppciseries_ s_ppc\([^6ip]\|$\)_ppcpseries_ s_ppc\([^6ip]\|$\)_ppc64iseries_ s_ppc\([^6ip]\|$\)_ppc64pseries_' ;;
+-- 
+1.7.10
+

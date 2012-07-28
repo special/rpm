@@ -1,0 +1,35 @@
+From a03e9194e9c8d5ebe1c48cdcec2dff598b84eb83 Mon Sep 17 00:00:00 2001
+From: David Greaves <david@dgreaves.com>
+Date: Mon, 25 Jun 2012 23:57:04 +0100
+Subject: [PATCH] debugsource
+
+---
+ scripts/find-debuginfo.sh |    9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
+
+diff --git a/scripts/find-debuginfo.sh b/scripts/find-debuginfo.sh
+index 505dbde..a70fcd0 100644
+--- a/scripts/find-debuginfo.sh
++++ b/scripts/find-debuginfo.sh
+@@ -272,10 +272,17 @@ if [ -d "${RPM_BUILD_ROOT}/usr/lib" -o -d "${RPM_BUILD_ROOT}/usr/src" ]; then
+ 
+   (cd "${RPM_BUILD_ROOT}/usr"
+    test ! -d lib/debug || find lib/debug ! -type d
+-   test ! -d src/debug || find src/debug -mindepth 1 -maxdepth 1
+   ) | sed 's,^,/usr/,' >> "$LISTFILE"
+ fi
+ 
++: > "$SOURCEFILE"
++if [ -d "${RPM_BUILD_ROOT}/usr/src" ]; then
++  (cd "${RPM_BUILD_ROOT}/usr"
++   test ! -d src/debug || find src/debug -mindepth 1 -maxdepth 1
++  ) | sed 's,^,/usr/,' >> "$SOURCEFILE"
++fi
++
++
+ # Append to $1 only the lines from stdin not already in the file.
+ append_uniq()
+ {
+-- 
+1.7.10
+

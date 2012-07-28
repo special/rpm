@@ -1,0 +1,36 @@
+From 562e94129dee0ec703c1bd164a529c52abb37e85 Mon Sep 17 00:00:00 2001
+From: David Greaves <david@dgreaves.com>
+Date: Mon, 25 Jun 2012 23:57:04 +0100
+Subject: [PATCH] rpm-4.7.1-mips64el
+
+---
+ installplatform |    6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/installplatform b/installplatform
+index a1128ba..42fab41 100755
+--- a/installplatform
++++ b/installplatform
+@@ -51,6 +51,7 @@ for SUBST in $SUBSTS ; do
+     s390x-linux) LIB=lib64 ;;
+     ppc64-linux|powerpc64-linux) LIB=lib64 ;;
+     x86_64-linux|amd64-linux|ia32e-linux) LIB=lib64 ;;
++    mips*-linux) LIB=lib ;;
+     *) LIB=lib;;
+   esac
+ 
+@@ -107,6 +108,11 @@ for SUBST in $SUBSTS ; do
+ 	ISANAME=alpha
+ 	ISABITS=64
+ 	;;
++    mips*)
++	# We assume N32 first
++	ISANAME=mips
++	ISABITS=32
++	;;
+   esac
+ 
+   case $VENDOR in
+-- 
+1.7.10
+

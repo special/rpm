@@ -1,8 +1,11 @@
-commit 87d9e3c4adac92ff544440dd1239a4ae4fe05bb4
-Author: Panu Matilainen <pmatilai@redhat.com>
-Date:   Mon Nov 28 14:00:45 2011 +0200
+From 20a3d8f266332d22dd8d31cfb1eeb1d248528a8a Mon Sep 17 00:00:00 2001
+From: David Greaves <david@dgreaves.com>
+Date: Mon, 25 Jun 2012 23:57:04 +0100
+Subject: [PATCH] rpm-4.9.x-elfattr
 
-    Fix classification of ELF binaries with setuid/setgid bit, oops...
+---
+ fileattrs/elf.attr |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/fileattrs/elf.attr b/fileattrs/elf.attr
 index bc6ce83..595b33e 100644
@@ -14,3 +17,6 @@ index bc6ce83..595b33e 100644
 -%__elf_magic		^(sticky )?ELF (32|64)-bit.*$
 +%__elf_magic		^(setuid )?(setgid )?(sticky )?ELF (32|64)-bit.*$
  %__elf_flags		exeonly
+-- 
+1.7.10
+
