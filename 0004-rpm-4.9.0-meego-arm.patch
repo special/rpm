@@ -98,5 +98,5 @@ index 0033bbd..9f1eaca 100644
  buildarch_compat: hppa1.2: hppa1.1
  buildarch_compat: hppa1.1: hppa1.0
 -- 
-1.7.10
+1.7.10.3
 

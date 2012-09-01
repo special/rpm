@@ -21,5 +21,5 @@ index e8b359b..c634f3b 100644
  # "Packages" should have shared/exclusive fcntl(2) lock using "lockdbfd".
  %_dbi_config_Packages		%{?_dbi_config} lockdbfd
 -- 
-1.7.10
+1.7.10.3
 

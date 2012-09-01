@@ -20,6 +20,7 @@ Patch7: 0007-rpm-4.7.1-mips64el.patch
 Patch8: 0008-rpm-4.9.0-nofsync.patch
 Patch9: 0009-rpm-4.9.x-elfattr.patch
 Patch10: 0010-rpm-4.9.1.2-skipprep.patch
+Patch11: 0011-Correct-arm-install.patch
 
 # Partially GPL/LGPL dual-licensed and some bits with BSD
 # SourceLicense: (GPLv2+ and LGPLv2+ with exceptions) and BSD 
@@ -119,6 +120,7 @@ that will manipulate RPM packages and databases.
 %patch8 -p1
 %patch9 -p1
 %patch10 -p1
+%patch11 -p1
 
 %build
 CPPFLAGS="$CPPFLAGS `pkg-config --cflags nss`"

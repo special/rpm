@@ -1,3 +1,6 @@
+* Sat Sep 01 2012 David Greaves <david@dgreaves.com> - 4.9.1.2-4
+ - Correct ARM patch for armv7tnhl
+
 * Fri Jul 27 2012 David Greaves <david@dgreaves.com> - 4.9.1.2-3
  - Add 0010-rpm-4.9.1.2-skipprepclean.patch to support quickbuild
    using --skip-prep and --skip-clean options
