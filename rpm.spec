@@ -17,7 +17,6 @@ Patch4: 0004-rpm-4.9.0-meego-arm.patch
 Patch5: 0005-debugsource.patch
 Patch6: 0006-rpm-shorten-changelog.patch
 Patch7: 0007-rpm-4.7.1-mips64el.patch
-Patch8: 0008-rpm-4.9.0-nofsync.patch
 Patch9: 0009-rpm-4.9.x-elfattr.patch
 Patch10: 0010-rpm-4.9.1.2-skipprep.patch
 Patch11: 0011-Correct-arm-install.patch
@@ -117,7 +116,6 @@ that will manipulate RPM packages and databases.
 %patch5 -p1
 %patch6 -p1
 %patch7 -p1
-%patch8 -p1
 %patch9 -p1
 %patch10 -p1
 %patch11 -p1

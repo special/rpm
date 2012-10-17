@@ -1,3 +1,6 @@
+* Wed Oct 17 2012 Islam Amer <islam.amer@jollamobile.com> - 4.9.1.2-5
+ - Revert nofsync patch. Fixes MER#566
+
 * Sat Sep 01 2012 David Greaves <david@dgreaves.com> - 4.9.1.2-4
  - Correct ARM patch for armv7tnhl
 
