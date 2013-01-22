@@ -1,3 +1,6 @@
+* Tue Jan 22 2013 Oleg Girko <ol+mer@infoserver.ru> - 4.9.1.2-2
+- Add missing License header for rpm-python package.
+
 * Fri Dec 02 2011 Carsten Munk <carsten@maemo.org> - 4.9.1.2
 - Update to 4.9.1.2
 

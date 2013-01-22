@@ -15,7 +15,7 @@
 Summary: The RPM package management system
 Name: rpm-python
 Version: %{rpmver}
-Release: 1
+Release: 2
 BuildRequires: python-devel
 %{expand:%(sed -n -e '/^Source0:/,/^##PYTHON##/p' <%_sourcedir/rpm.spec)}
 Source100: rpm.spec
@@ -25,6 +25,7 @@ Requires: popt >= 1.10.2.1
 Requires: curl
 Requires: rpm = %{version}
 BuildRequires: db4-devel
+License: GPLv2+
 
 
 # XXX generally assumed to be installed but make it explicit as rpm
