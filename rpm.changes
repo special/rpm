@@ -1,3 +1,6 @@
+* Tue Jan 22 2013 Oleg Girko <ol+mer@infoserver.ru> 4.9.1.2-6
+- Disable multilib for 64-bit architectures.
+
 * Wed Oct 17 2012 Islam Amer <islam.amer@jollamobile.com> - 4.9.1.2-5
  - Revert nofsync patch. Fixes MER#566
 

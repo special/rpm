@@ -4,7 +4,7 @@
 Summary: The RPM package management system
 Name: rpm
 Version: 4.9.1.2
-Release: 1
+Release: 6
 Source0: http://rpm.org/releases/rpm-4.9.x/rpm-%{version}.tar.bz2
 Source1: libsymlink.attr
 Group: System/Base
@@ -20,6 +20,7 @@ Patch7: 0007-rpm-4.7.1-mips64el.patch
 Patch9: 0009-rpm-4.9.x-elfattr.patch
 Patch10: 0010-rpm-4.9.1.2-skipprep.patch
 Patch11: 0011-Correct-arm-install.patch
+Patch12: 0012-rpm-disable-multilib.patch
 
 # Partially GPL/LGPL dual-licensed and some bits with BSD
 # SourceLicense: (GPLv2+ and LGPLv2+ with exceptions) and BSD 
@@ -119,6 +120,7 @@ that will manipulate RPM packages and databases.
 %patch9 -p1
 %patch10 -p1
 %patch11 -p1
+%patch12 -p1
 
 %build
 CPPFLAGS="$CPPFLAGS `pkg-config --cflags nss`"
