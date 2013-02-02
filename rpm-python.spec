@@ -25,7 +25,6 @@ Requires: popt >= 1.10.2.1
 Requires: curl
 Requires: rpm = %{version}
 BuildRequires: db4-devel
-License: GPLv2+
 
 
 # XXX generally assumed to be installed but make it explicit as rpm
