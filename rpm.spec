@@ -9,18 +9,28 @@ Source0: http://rpm.org/releases/rpm-4.9.x/rpm-%{version}.tar.bz2
 Source1: libsymlink.attr
 Group: System/Base
 Url: http://www.rpm.org/
+# See also https://github.com/mer-packages/rpm/
 
-Patch1: 0001-rpm-4.5.90-pkgconfig-path.patch
-Patch2: 0002-rpm-4.8.0-tilde.patch
-Patch3: 0003-rpm-macros.patch
-Patch4: 0004-rpm-4.9.0-meego-arm.patch
-Patch5: 0005-debugsource.patch
-Patch6: 0006-rpm-shorten-changelog.patch
-Patch7: 0007-rpm-4.7.1-mips64el.patch
-Patch9: 0009-rpm-4.9.x-elfattr.patch
-Patch10: 0010-rpm-4.9.1.2-skipprep.patch
-Patch11: 0011-Correct-arm-install.patch
-Patch12: 0012-rpm-disable-multilib.patch
+Patch0: 0001-rpm-4.5.90-pkgconfig-path.patch
+Patch1: 0002-rpm-4.8.0-tilde.patch
+Patch2: 0003-rpm-macros.patch
+Patch3: 0004-rpm-4.9.0-meego-arm.patch
+Patch4: 0005-debuginfo.diff.patch
+Patch5: 0006-rpm-shorten-changelog.patch
+Patch6: 0007-rpm-4.7.1-mips64el.patch
+Patch7: 0008-rpm-4.9.1.2-skipprep.patch
+Patch8: 0009-Correct-arm-install.patch
+Patch9: 0010-rpm-disable-multilib.patch
+Patch10: 0011-Possibility-to-do-cross-platform-rpmrcs-with-ease.patch
+Patch11: 0012-openSUSE-finddebuginfo-patch.patch
+Patch12: 0013-Add-debugsource-package-to-rpm-straight-don-t-strip-.patch
+Patch13: 0014-OpenSUSE-finddebuginfo-absolute-links.patch
+Patch14: 0015-OpenSUSE-autodeps.patch
+Patch15: 0016-OpenSUSE-buildidprov.patch
+Patch16: 0017-OpenSUSE-debugsubpkg.patch
+Patch17: 0018-OpenSUSE-fileattrs.patch
+Patch18: 0019-OpenSUSE-elfdeps.patch
+
 
 # Partially GPL/LGPL dual-licensed and some bits with BSD
 # SourceLicense: (GPLv2+ and LGPLv2+ with exceptions) and BSD 
@@ -32,7 +42,7 @@ Requires: coreutils
 Requires: db4-utils
 BuildRequires: db4-devel
 
-BuildRequires: meego-rpm-config
+BuildRequires: %{_vendor}-rpm-config
 BuildRequires: gawk
 BuildRequires: elfutils-devel >= 0.112
 BuildRequires: elfutils-libelf-devel
@@ -97,7 +107,7 @@ Requires: pkgconfig
 %description build
 The rpm-build package contains the scripts and executable programs
 that are used to build packages using the RPM Package Manager.
-
+#
 
 %package apidocs
 Summary: API documentation for RPM libraries
@@ -117,10 +127,17 @@ that will manipulate RPM packages and databases.
 %patch5 -p1
 %patch6 -p1
 %patch7 -p1
+%patch8 -p1
 %patch9 -p1
 %patch10 -p1
 %patch11 -p1
 %patch12 -p1
+%patch13 -p1
+%patch14 -p1
+%patch15 -p1
+%patch16 -p1
+%patch17 -p1
+%patch18 -p1
 
 %build
 CPPFLAGS="$CPPFLAGS `pkg-config --cflags nss`"
@@ -150,12 +167,23 @@ make %{?jobs:-j%jobs}
 rm -rf $RPM_BUILD_ROOT
 
 %make_install
+
+
+#sed "s/i386/arm/g" platform > platform.arm
+#sed "s/i386/mipsel/g" platform > platform.mipsel
+
+#DESTDIR=$RPM_BUILD_ROOT ./installplatform rpmrc macros platform.arm arm %{_vendor} linux -gnueabi
+#DESTDIR=$RPM_BUILD_ROOT ./installplatform rpmrc macros platform.mipsel mipsel %{_vendor} linux -gnu
+
+
 find %{buildroot} -regex ".*\\.la$" | xargs rm -f -- 
 
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/rpm
 mkdir -p $RPM_BUILD_ROOT%{_libdir}/rpm
 install -m 644 %{SOURCE1} ${RPM_BUILD_ROOT}%{_libdir}/rpm/fileattrs/libsymlink.attr
 mkdir -p $RPM_BUILD_ROOT/var/lib/rpm
+
+install -m 755 scripts/debuginfo.prov $RPM_BUILD_ROOT/usr/lib/rpm
 
 
 for dbi in \
@@ -224,7 +252,6 @@ exit 0
 %doc %{_mandir}/man8/rpmspec.8.gz
 %{_libdir}/rpm-plugins/exec.so
 %{_libdir}/rpm-plugins/sepolicy.so
-%{_libdir}/rpm/elfdeps
 
 # XXX this places translated manuals to wrong package wrt eg rpmbuild
 %lang(fr) %{_mandir}/fr/man[18]/*.[18]*
@@ -258,7 +285,7 @@ exit 0
 
 %{_libdir}/rpm/fileattrs/*.attr
 %{_libdir}/rpm/script.req
-
+%{_libdir}/rpm/elfdeps
 %{_libdir}/rpm/brp-*
 %{_libdir}/rpm/check-buildroot
 %{_libdir}/rpm/check-files
@@ -289,7 +316,7 @@ exit 0
 #%{_libdir}/rpm/rpmdiff*
 %{_libdir}/rpm/desktop-file.prov
 %{_libdir}/rpm/fontconfig.prov
-
+%{_libdir}/rpm/debuginfo.prov
 %{_libdir}/rpm/macros.perl
 %{_libdir}/rpm/macros.python
 %{_libdir}/rpm/macros.php

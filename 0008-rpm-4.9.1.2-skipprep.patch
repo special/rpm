@@ -1,11 +1,11 @@
-From 0cb99cc7cf97694e682ba2be641109d954f70be2 Mon Sep 17 00:00:00 2001
+From 86aef6d8d386dc06429acaefcd46f52a7f4fa6cc Mon Sep 17 00:00:00 2001
 From: David Greaves <david@dgreaves.com>
 Date: Mon, 25 Jun 2012 23:57:04 +0100
-Subject: [PATCH] rpm-4.9.1.2-skipprep
+Subject: [PATCH 08/19] rpm-4.9.1.2-skipprep
 
 ---
  rpmbuild.c |   12 ++++++++++--
- 1 file changed, 10 insertions(+), 2 deletions(-)
+ 1 files changed, 10 insertions(+), 2 deletions(-)
 
 diff --git a/rpmbuild.c b/rpmbuild.c
 index 856798a..9771124 100644
@@ -52,5 +52,5 @@ index 856798a..9771124 100644
  	    
  	case 'l':
 -- 
-1.7.10.3
+1.7.9
 

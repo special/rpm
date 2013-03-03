@@ -1,6 +1,17 @@
+From 8d15f508d8cfc0fca0e54bc042ca6a4aa5018b00 Mon Sep 17 00:00:00 2001
+From: Carsten Munk <carsten.munk@jollamobile.com>
+Date: Sun, 3 Mar 2013 08:55:47 +0100
+Subject: [PATCH 10/19] rpm disable multilib
+
+---
+ installplatform |    9 +++++----
+ 1 files changed, 5 insertions(+), 4 deletions(-)
+
+diff --git a/installplatform b/installplatform
+index 1af6c0f..44b2243 100755
 --- a/installplatform
 +++ b/installplatform
-@@ -46,10 +46,11 @@
+@@ -46,10 +46,11 @@ for SUBST in $SUBSTS ; do
  
    ARCH_INSTALL_POST='%{nil}'
    case "${ARCH}-${OS}" in
@@ -16,3 +27,6 @@
      mips*-linux) LIB=lib ;;
      *) LIB=lib;;
    esac
+-- 
+1.7.9
+

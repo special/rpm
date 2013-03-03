@@ -1,12 +1,12 @@
-From 72297747695f44132102eadc5c20e04c00d7b494 Mon Sep 17 00:00:00 2001
+From 83cfab422a8abfa492aaf677b7d1ef3e97bd5b0c Mon Sep 17 00:00:00 2001
 From: David Greaves <david@dgreaves.com>
 Date: Mon, 25 Jun 2012 23:57:04 +0100
-Subject: [PATCH] rpm-shorten-changelog
+Subject: [PATCH 06/19] rpm-shorten-changelog
 
 ---
  build/pack.c           |   58 ++++++++++++++++++++++++++++++++++++++++++++++++
- build/parseChangelog.c |    5 +++++
- 2 files changed, 63 insertions(+)
+ build/parseChangelog.c |    5 ++++
+ 2 files changed, 63 insertions(+), 0 deletions(-)
 
 diff --git a/build/pack.c b/build/pack.c
 index 981a03e..0934e39 100644
@@ -101,5 +101,5 @@ index d4681cb..0c02051 100644
  	name = s;
  	while (*s != '\0') s++;
 -- 
-1.7.10.3
+1.7.9
 

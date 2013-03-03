@@ -1,12 +1,12 @@
-From 13d703b6f831a94c36e91c0df01f97c309b9338d Mon Sep 17 00:00:00 2001
+From f0eaddee4c0955ef551a3f5651da67e3ffdbb6d2 Mon Sep 17 00:00:00 2001
 From: David Greaves <david@dgreaves.com>
 Date: Sat, 1 Sep 2012 11:41:19 +0000
-Subject: [PATCH] Correct arm install
+Subject: [PATCH 09/19] Correct arm install
 
 Signed-off-by: David Greaves <david@dgreaves.com>
 ---
  installplatform |    3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ 1 files changed, 1 insertions(+), 2 deletions(-)
 
 diff --git a/installplatform b/installplatform
 index 42fab41..1af6c0f 100755
@@ -23,5 +23,5 @@ index 42fab41..1af6c0f 100755
    sparc*) SUBSTS='s_sparc\(64\|64v\|v9v\|v9\)_sparc_ s_sparc64_sparcv9_;s_sparc\([^v]\|$\)_sparcv9\1_ s_sparcv9_sparc64_;s_sparc\([^6]\|$\)_sparc64\1_' ;;
    powerpc*|ppc*) SUBSTS='s_ppc64_ppc_ s_ppc\([^6ip]\|$\)_ppc64\1_ s_ppc\([^6ip]\|$\)_ppciseries_ s_ppc\([^6ip]\|$\)_ppcpseries_ s_ppc\([^6ip]\|$\)_ppc64iseries_ s_ppc\([^6ip]\|$\)_ppc64pseries_' ;;
 -- 
-1.7.10.3
+1.7.9
 

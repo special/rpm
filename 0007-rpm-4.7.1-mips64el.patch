@@ -1,11 +1,11 @@
-From 562e94129dee0ec703c1bd164a529c52abb37e85 Mon Sep 17 00:00:00 2001
+From fd7f2e7deb74b68b18dafa0dc92f50d1f99bcb76 Mon Sep 17 00:00:00 2001
 From: David Greaves <david@dgreaves.com>
 Date: Mon, 25 Jun 2012 23:57:04 +0100
-Subject: [PATCH] rpm-4.7.1-mips64el
+Subject: [PATCH 07/19] rpm-4.7.1-mips64el
 
 ---
  installplatform |    6 ++++++
- 1 file changed, 6 insertions(+)
+ 1 files changed, 6 insertions(+), 0 deletions(-)
 
 diff --git a/installplatform b/installplatform
 index a1128ba..42fab41 100755
@@ -32,5 +32,5 @@ index a1128ba..42fab41 100755
  
    case $VENDOR in
 -- 
-1.7.10.3
+1.7.9
 

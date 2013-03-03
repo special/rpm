@@ -1,0 +1,40 @@
+From 9394aadc1804bed3fa62396106b925e0b712bfb7 Mon Sep 17 00:00:00 2001
+From: Carsten Munk <carsten.munk@jollamobile.com>
+Date: Sun, 3 Mar 2013 09:01:59 +0100
+Subject: [PATCH 11/19] Possibility to do cross platform rpmrcs with ease
+
+---
+ installplatform |   10 ++++++++++
+ 1 files changed, 10 insertions(+), 0 deletions(-)
+
+diff --git a/installplatform b/installplatform
+index 44b2243..7a7fbbf 100755
+--- a/installplatform
++++ b/installplatform
+@@ -16,6 +16,12 @@ VENDOR="`$RPM --eval '%{_vendor}'`"
+ OS="`$RPM --eval '%{_os}'`"
+ RPMRC_GNU="`$RPM --eval '%{_gnu}'`"
+ 
++# In case we want to override --cvm
++arch="${4:-$arch}"
++VENDOR="${5:-$VENDOR}"
++OS="${6:-$OS}"
++RPMRC_GNU=${7:-$RPMRC_GNU}
++
+ case "$arch" in
+   i[3456]86|pentium[34]|athlon|geode) SUBSTS='s_i386_i386_ s_i386_i486_ s_i386_i586_ s_i386_i686_ s_i386_pentium3_ s_i386_pentium4_ s_i386_athlon_ s_i386_geode_' ;;
+   alpha*) SUBSTS='s_alpha_alpha_ s_alpha_alphaev5_ s_alpha_alphaev56_ s_alpha_alphapca56_ s_alpha_alphaev6_ s_alpha_alphaev67_' ;;
+@@ -158,6 +164,10 @@ for SUBST in $SUBSTS ; do
+ 
+ done
+ 
++if [ -n "$4" ]; then
++	exit 0
++fi
++
+ { cd ${DESTDIR}/${platformdir}
+   [ -L noarch-${OS} ] && rm -f noarch-${OS} 2>/dev/null
+   mkdir -p noarch-${OS}
+-- 
+1.7.9
+

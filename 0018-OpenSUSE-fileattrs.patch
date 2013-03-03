@@ -1,0 +1,94 @@
+From e4702ed242c78b1e650ee9396b610c33754169b4 Mon Sep 17 00:00:00 2001
+From: Carsten Munk <carsten.munk@jollamobile.com>
+Date: Sun, 3 Mar 2013 09:08:58 +0100
+Subject: [PATCH 18/19] OpenSUSE: fileattrs
+
+Signed-off-by: Carsten Munk <carsten.munk@jollamobile.com>
+---
+ fileattrs/Makefile.am    |    5 +++--
+ fileattrs/debuginfo.attr |    2 ++
+ fileattrs/elf.attr       |    3 ++-
+ fileattrs/elflib.attr    |    4 ++++
+ fileattrs/firmware.attr  |    2 ++
+ fileattrs/ksyms.attr     |    4 ++++
+ fileattrs/sysvinit.attr  |    2 ++
+ 7 files changed, 19 insertions(+), 3 deletions(-)
+ create mode 100644 fileattrs/debuginfo.attr
+ create mode 100644 fileattrs/elflib.attr
+ create mode 100644 fileattrs/firmware.attr
+ create mode 100644 fileattrs/ksyms.attr
+ create mode 100644 fileattrs/sysvinit.attr
+
+diff --git a/fileattrs/Makefile.am b/fileattrs/Makefile.am
+index 0fd1435..99693e2 100644
+--- a/fileattrs/Makefile.am
++++ b/fileattrs/Makefile.am
+@@ -5,7 +5,8 @@ include $(top_srcdir)/rpm.am
+ fattrsdir = $(rpmconfigdir)/fileattrs
+ 
+ fattrs_DATA = \
+-	desktop.attr elf.attr font.attr libtool.attr perl.attr perllib.attr \
+-	pkgconfig.attr python.attr ocaml.attr script.attr mono.attr
++	elf.attr font.attr libtool.attr perl.attr perllib.attr \
++	pkgconfig.attr python.attr ocaml.attr script.attr mono.attr \
++	debuginfo.attr elflib.attr firmware.attr ksyms.attr sysvinit.attr
+ 
+ EXTRA_DIST = $(fattrs_DATA)
+diff --git a/fileattrs/debuginfo.attr b/fileattrs/debuginfo.attr
+new file mode 100644
+index 0000000..91fd995
+--- /dev/null
++++ b/fileattrs/debuginfo.attr
+@@ -0,0 +1,2 @@
++%__debuginfo_provides	%{_rpmconfigdir}/debuginfo.prov
++%__debuginfo_path	^/usr/lib/debug/
+diff --git a/fileattrs/elf.attr b/fileattrs/elf.attr
+index bc6ce83..49de068 100644
+--- a/fileattrs/elf.attr
++++ b/fileattrs/elf.attr
+@@ -1,4 +1,5 @@
+ %__elf_provides		%{_rpmconfigdir}/elfdeps --provides %{?__filter_GLIBC_PRIVATE:--filter-private}
+ %__elf_requires		%{_rpmconfigdir}/elfdeps --requires %{?__filter_GLIBC_PRIVATE:--filter-private}
+-%__elf_magic		^(sticky )?ELF (32|64)-bit.*$
++%__elf_magic		^(setuid )?(setgid )?(sticky )?ELF (32|64)-bit.*executable
+ %__elf_flags		exeonly
++%__elf_exclude_path	^/usr/lib/debug/
+diff --git a/fileattrs/elflib.attr b/fileattrs/elflib.attr
+new file mode 100644
+index 0000000..a8aafa6
+--- /dev/null
++++ b/fileattrs/elflib.attr
+@@ -0,0 +1,4 @@
++%__elflib_provides	%{_rpmconfigdir}/elfdeps --assume-exec --provides %{?__filter_GLIBC_PRIVATE:--filter-private}
++%__elflib_requires	%{_rpmconfigdir}/elfdeps --assume-exec --requires %{?__filter_GLIBC_PRIVATE:--filter-private}
++%__elflib_magic		^(setuid )?(setgid )?(sticky )?ELF (32|64)-bit.*shared object
++%__elflib_exclude_path	^/usr/lib/debug/
+diff --git a/fileattrs/firmware.attr b/fileattrs/firmware.attr
+new file mode 100644
+index 0000000..2d577aa
+--- /dev/null
++++ b/fileattrs/firmware.attr
+@@ -0,0 +1,2 @@
++%__firmware_provides	%{_rpmconfigdir}/firmware.prov
++%__firmware_path	/lib/firmware/
+diff --git a/fileattrs/ksyms.attr b/fileattrs/ksyms.attr
+new file mode 100644
+index 0000000..8dbf16b
+--- /dev/null
++++ b/fileattrs/ksyms.attr
+@@ -0,0 +1,4 @@
++%__ksyms_provides	%{_rpmconfigdir}/find-provides.ksyms %name
++%__ksyms_requires	%{_rpmconfigdir}/find-requires.ksyms %name
++%__ksyms_supplements	%{_rpmconfigdir}/find-supplements.ksyms %name
++%__ksyms_path	(/lib/modules/.*\.ko(\.gz)?)|(/boot/vmlinu[xz].*)$
+diff --git a/fileattrs/sysvinit.attr b/fileattrs/sysvinit.attr
+new file mode 100644
+index 0000000..81810e5
+--- /dev/null
++++ b/fileattrs/sysvinit.attr
+@@ -0,0 +1,2 @@
++%__sysvinit_provides	%{_rpmconfigdir}/sysvinitdeps.sh --provides
++%__sysvinit_path	^/etc/init\.d/
+-- 
+1.7.9
+

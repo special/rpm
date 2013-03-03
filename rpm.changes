@@ -1,3 +1,10 @@
+* Sun Mar 03 2013 Carsten Munk <carsten.munk@jollamobile.com> - 4.9.1.2-8
+- Integrate some handy openSUSE patches such as: 
+  - seperate debuginfo per binary package
+  - debuginfo(hash) provides for debuginfo
+  - more deterministic debuginfo
+  - move debugsource package to our rpm config
+
 * Sat Feb 02 2013 Carsten Munk <carsten.munk@jollamobile.com> - 4.9.1.2-7
 - Remove License from rpm-python.spec, it comes from expand macro
 

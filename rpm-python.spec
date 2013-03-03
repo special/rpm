@@ -29,7 +29,7 @@ BuildRequires: db4-devel
 
 # XXX generally assumed to be installed but make it explicit as rpm
 # is a bit special...
-BuildRequires: meego-rpm-config
+BuildRequires: %{_vendor}-rpm-config
 BuildRequires: gawk
 BuildRequires: elfutils-devel >= 0.112
 BuildRequires: elfutils-libelf-devel

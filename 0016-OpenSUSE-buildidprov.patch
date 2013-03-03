@@ -1,0 +1,74 @@
+From f18b95f7938b1318eb3ba9638501d5591cbb21ed Mon Sep 17 00:00:00 2001
+From: Carsten Munk <carsten.munk@jollamobile.com>
+Date: Sun, 3 Mar 2013 09:06:52 +0100
+Subject: [PATCH 16/19] OpenSUSE: buildidprov
+
+Signed-off-by: Carsten Munk <carsten.munk@jollamobile.com>
+---
+ autodeps/linux.prov    |    8 ++++++++
+ macros.in              |    3 ++-
+ scripts/debuginfo.prov |   12 ++++++++++++
+ 3 files changed, 22 insertions(+), 1 deletions(-)
+ create mode 100644 scripts/debuginfo.prov
+
+diff --git a/autodeps/linux.prov b/autodeps/linux.prov
+index 26272d8..81888b5 100644
+--- a/autodeps/linux.prov
++++ b/autodeps/linux.prov
+@@ -5,6 +5,9 @@
+ IFS=$'\n'
+ filelist=($(cat))
+ 
++debuginfolist=($(printf "%s\n" "${filelist[@]}" | grep "/usr/lib/debug/"))
++filelist=($(printf "%s\n" "${filelist[@]}" | grep -v "/usr/lib/debug/"))
++
+ solist=($(printf "%s\n" "${filelist[@]}" | grep "\\.so" | grep -v "^/lib/ld.so" | \
+ 	  tr '\n' '\0' | xargs -0 -r file -L | grep "ELF.*shared object" | \
+ 	  cut -d: -f1))
+@@ -59,6 +62,11 @@ done | sort -u
+     printf "%s\n" "${tcllist[@]}" | /usr/lib/rpm/tcl.prov | sort -u
+ 
+ #
++# --- debuginfo files
++[ -x /usr/lib/rpm/debuginfo.prov -a -n "$debuginfolist" ] &&
++     printf "%s\n" "${debuginfolist[@]}" | /usr/lib/rpm/debuginfo.prov | sort -u
++
++#
+ # --- Mono exes/dlls
+ : ${MONO_PREFIX=/usr}
+ if [ -x $MONO_PREFIX/bin/mono -a -n "$monolist" ] ; then
+diff --git a/macros.in b/macros.in
+index 9497ee4..55fb4c9 100644
+--- a/macros.in
++++ b/macros.in
+@@ -184,7 +184,8 @@
+ %package debuginfo\
+ Summary: Debug information for package %{name}\
+ Group: Development/Debug\
+-AutoReqProv: 0\
++AutoReq: 0\
++AutoProv: 1\
+ #Requires: %{?!debug_package_requires:%{name} = %{version}-%{release}}%{?debug_package_requires}\
+ %description debuginfo\
+ This package provides debug information for package %{name}.\
+diff --git a/scripts/debuginfo.prov b/scripts/debuginfo.prov
+new file mode 100644
+index 0000000..4d99257
+--- /dev/null
++++ b/scripts/debuginfo.prov
+@@ -0,0 +1,12 @@
++#!/bin/sh
++
++while read instfile ; do
++    case $instfile in
++	*/usr/lib/debug/.build-id/*.debug)
++	    if [ -f "$instfile" ] ; then
++		BUILDID=$(echo $instfile | sed -ne 's|.*/usr/lib/debug/.build-id/\([0-9a-f]*\)/\([0-9a-f]*\)\.debug|\1\2|p')
++		echo "debuginfo(build-id) = $BUILDID"
++	    fi
++	    ;;
++    esac
++done
+-- 
+1.7.9
+

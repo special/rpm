@@ -1,0 +1,40 @@
+From 3373586d7ea1c122c109a236e3963abbd299372b Mon Sep 17 00:00:00 2001
+From: Carsten Munk <carsten.munk@jollamobile.com>
+Date: Sun, 3 Mar 2013 08:51:51 +0100
+Subject: [PATCH 05/19] debuginfo.diff
+
+---
+ macros.in |    9 ++++-----
+ 1 files changed, 4 insertions(+), 5 deletions(-)
+
+diff --git a/macros.in b/macros.in
+index e8b359b..5aaa503 100644
+--- a/macros.in
++++ b/macros.in
+@@ -180,19 +180,18 @@
+ 
+ #	Template for debug information sub-package.
+ %debug_package \
+-%ifnarch noarch\
+ %global __debug_package 1\
+-%package debug\
++%package debuginfo\
+ Summary: Debug information for package %{name}\
+ Group: Development/Debug\
+ AutoReqProv: 0\
+-%description debug\
++#Requires: %{?!debug_package_requires:%{name} = %{version}-%{release}}%{?debug_package_requires}\
++%description debuginfo\
+ This package provides debug information for package %{name}.\
+ Debug information is useful when developing applications that use this\
+ package or when debugging this package.\
+-%files debug -f debugfiles.list\
++%files debuginfo -f debugfiles.list\
+ %defattr(-,root,root)\
+-%endif\
+ %{nil}
+ 
+ %_defaultdocdir		%{_datadir}/doc
+-- 
+1.7.9
+

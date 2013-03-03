@@ -1,7 +1,7 @@
-From 7a24ab27f2ffa32e4896495506c994a201fe935d Mon Sep 17 00:00:00 2001
+From 87e6b59d0074995e648a21dee8337b7588bad817 Mon Sep 17 00:00:00 2001
 From: David Greaves <david@dgreaves.com>
 Date: Mon, 25 Jun 2012 23:57:04 +0100
-Subject: [PATCH] rpm-4.9.0-meego-arm
+Subject: [PATCH 04/19] rpm-4.9.0-meego-arm
 
 ---
  installplatform |    3 ++-
@@ -98,5 +98,5 @@ index 0033bbd..9f1eaca 100644
  buildarch_compat: hppa1.2: hppa1.1
  buildarch_compat: hppa1.1: hppa1.0
 -- 
-1.7.10.3
+1.7.9
 

@@ -1,7 +1,7 @@
-From ffa26e871de616d128342f49ff48c28e202d00aa Mon Sep 17 00:00:00 2001
+From 254ab8bc25b9a3d91f73cf79b419d36b0858b14d Mon Sep 17 00:00:00 2001
 From: David Greaves <david@dgreaves.com>
 Date: Mon, 25 Jun 2012 23:57:04 +0100
-Subject: [PATCH] rpm-4.8.0-tilde
+Subject: [PATCH 02/19] rpm-4.8.0-tilde
 
 ---
  build/parsePreamble.c |    2 +-
@@ -71,5 +71,5 @@ index f5ae092..fc920de 100644
  
      /* whichever version still has characters left over wins */
 -- 
-1.7.10.3
+1.7.9
 
