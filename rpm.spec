@@ -181,6 +181,7 @@ find %{buildroot} -regex ".*\\.la$" | xargs rm -f --
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/rpm
 mkdir -p $RPM_BUILD_ROOT%{_libdir}/rpm
 install -m 644 %{SOURCE1} ${RPM_BUILD_ROOT}%{_libdir}/rpm/fileattrs/libsymlink.attr
+rm -f ${RPM_BUILD_ROOT}%{_libdir}/rpm/fileattrs/ksyms.attr
 mkdir -p $RPM_BUILD_ROOT/var/lib/rpm
 
 install -m 755 scripts/debuginfo.prov $RPM_BUILD_ROOT/usr/lib/rpm
