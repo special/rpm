@@ -1,3 +1,6 @@
+* Sat Apr 13 2013 Carsten Munk <carsten.munk@jollamobile.com> - 4.9.1.2-10
+- libsymlink.attr shouldn't try this in /usr/lib/debug
+
 * Mon Mar 11 2013 Carsten Munk <carsten.munk@jollamobile.com> - 4.9.1.2-9
 - Disable ksyms from openSUSE attrs
 
