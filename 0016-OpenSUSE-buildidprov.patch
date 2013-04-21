@@ -1,14 +1,13 @@
-From f18b95f7938b1318eb3ba9638501d5591cbb21ed Mon Sep 17 00:00:00 2001
-From: Carsten Munk <carsten.munk@jollamobile.com>
-Date: Sun, 3 Mar 2013 09:06:52 +0100
-Subject: [PATCH 16/19] OpenSUSE: buildidprov
+From 02e5c4ed129bf451042d1b07ef51f074ed350b8a Mon Sep 17 00:00:00 2001
+From: David Greaves <david@dgreaves.com>
+Date: Wed, 17 Apr 2013 20:41:09 +0000
+Subject: [PATCH] OpenSUSE-buildidprov
 
-Signed-off-by: Carsten Munk <carsten.munk@jollamobile.com>
 ---
  autodeps/linux.prov    |    8 ++++++++
  macros.in              |    3 ++-
  scripts/debuginfo.prov |   12 ++++++++++++
- 3 files changed, 22 insertions(+), 1 deletions(-)
+ 3 files changed, 22 insertions(+), 1 deletion(-)
  create mode 100644 scripts/debuginfo.prov
 
 diff --git a/autodeps/linux.prov b/autodeps/linux.prov
@@ -70,5 +69,5 @@ index 0000000..4d99257
 +    esac
 +done
 -- 
-1.7.9
+1.7.10.3
 

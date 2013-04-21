@@ -1,0 +1,86 @@
+From bfe06d3cee5d3fe5f059eb301fd9a2b44e6cdb06 Mon Sep 17 00:00:00 2001
+From: David Greaves <david@dgreaves.com>
+Date: Thu, 18 Apr 2013 17:58:36 +0100
+Subject: [PATCH] Add --do<phase> args and --noprep arg for control over build
+ phases
+
+Allows each phase to be run discretely; useful when integrating
+rpmbuild tightly into day-2-day workflow. Mer SDK uses this to replace
+qmake/make/deploy steps with rpmbuild driven steps.
+
+Signed-off-by: David Greaves <david@dgreaves.com>
+---
+ rpmbuild.c |   29 +++++++++++++++++++++++++++++
+ 1 file changed, 29 insertions(+)
+
+diff --git a/rpmbuild.c b/rpmbuild.c
+index 079ecab..32f49d3 100644
+--- a/rpmbuild.c
++++ b/rpmbuild.c
+@@ -56,6 +56,7 @@ static int skipPrep = 0;		/*!< from --skip-prep */
+ static char buildMode = 0;		/*!< Build mode (one of "btBC") */
+ static char buildChar = 0;		/*!< Build stage (one of "abcilps ") */
+ static rpmBuildFlags nobuildAmount = 0;	/*!< Build stage disablers */
++static rpmBuildFlags dobuildAmount = 0;	/*!< Build stage enablers */
+ static ARGV_t build_targets = NULL;	/*!< Target platform(s) */
+ 
+ static void buildArgCallback( poptContext con,
+@@ -162,6 +163,25 @@ static struct poptOption rpmBuildPoptTable[] = {
+ 	N_("build source package only from <tarball>"),
+ 	N_("<tarball>") },
+ 
++ /* the --do* options allow a subset of build phases to be executed */
++ { "doprep", '\0', POPT_BIT_SET, &dobuildAmount, RPMBUILD_PREP,
++	N_("execute %prep stage of the build"), NULL },
++ { "dobuild", '\0', POPT_BIT_SET, &dobuildAmount, RPMBUILD_BUILD,
++	N_("execute %build stage of the build"), NULL },
++ { "doinstall", '\0', POPT_BIT_SET, &dobuildAmount, RPMBUILD_INSTALL,
++	N_("execute %install stage of the build"), NULL },
++ { "dobinary", '\0', POPT_BIT_SET, &dobuildAmount, RPMBUILD_PACKAGEBINARY,
++	N_("build binary packages"), NULL },
++ { "dosource", '\0', POPT_BIT_SET, &dobuildAmount, RPMBUILD_PACKAGESOURCE,
++	N_("build source packages"), NULL },
++ { "doclean", '\0', POPT_BIT_SET, &dobuildAmount, RPMBUILD_CLEAN,
++	N_("execute %clean stage of the build"), NULL },
++ { "docheck", '\0', POPT_BIT_SET, &dobuildAmount, RPMBUILD_CHECK,
++	N_("execute rpm checks"), NULL },
++ { "dofilecheck", '\0', POPT_BIT_SET, &dobuildAmount, RPMBUILD_FILECHECK,
++	N_("execute rpm file checks"), NULL },
++
++ 
+  { "rebuild", '\0', 0, 0, POPT_REBUILD,
+ 	N_("build binary package from <source package>"),
+ 	N_("<source package>") },
+@@ -187,6 +207,8 @@ static struct poptOption rpmBuildPoptTable[] = {
+ 
+  { "noclean", '\0', POPT_BIT_SET, &nobuildAmount, RPMBUILD_CLEAN,
+ 	N_("do not execute %clean stage of the build"), NULL },
++ { "noprep", '\0', POPT_BIT_SET, &nobuildAmount, RPMBUILD_PREP,
++	N_("do not execute %prep stage of the build"), NULL },
+  { "nocheck", '\0', POPT_BIT_SET, &nobuildAmount, RPMBUILD_CHECK,
+ 	N_("do not execute %check stage of the build"), NULL },
+ 
+@@ -580,6 +602,9 @@ int main(int argc, char *argv[])
+ 	    ba->buildAmount |= RPMBUILD_RMBUILD;
+ 	}
+ 	ba->buildAmount &= ~(nobuildAmount);
++	if (dobuildAmount > 0) {
++		ba->buildAmount = dobuildAmount;
++	}
+ 
+ 	while ((pkg = poptGetArg(optCon))) {
+ 	    char * specFile = NULL;
+@@ -630,6 +655,10 @@ int main(int argc, char *argv[])
+ 	    break;
+ 	}
+ 	ba->buildAmount &= ~(nobuildAmount);
++	/* if any of --do* options are specified they override */
++	if (dobuildAmount > 0) {
++		ba->buildAmount = dobuildAmount;
++	}
+ 
+ 	while ((pkg = poptGetArg(optCon))) {
+ 	    ba->rootdir = rpmcliRootDir;
+-- 
+1.7.10.3
+

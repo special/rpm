@@ -1,11 +1,11 @@
-From a3dae428c61725069f538a2f60293338e1b59563 Mon Sep 17 00:00:00 2001
-From: Carsten Munk <carsten.munk@jollamobile.com>
-Date: Sun, 3 Mar 2013 09:03:14 +0100
-Subject: [PATCH 12/19] openSUSE: finddebuginfo patch
+From 4c38c1019522aca2a7c5e20159f131fe4e046e04 Mon Sep 17 00:00:00 2001
+From: David Greaves <david@dgreaves.com>
+Date: Wed, 17 Apr 2013 20:41:09 +0000
+Subject: [PATCH] openSUSE-finddebuginfo-patch
 
 ---
- scripts/find-debuginfo.sh |   69 ++++++++++++++++++++++++++++++++++----------
- 1 files changed, 53 insertions(+), 16 deletions(-)
+ scripts/find-debuginfo.sh |   69 ++++++++++++++++++++++++++++++++++-----------
+ 1 file changed, 53 insertions(+), 16 deletions(-)
 
 diff --git a/scripts/find-debuginfo.sh b/scripts/find-debuginfo.sh
 index 505dbde..902234a 100644
@@ -129,5 +129,5 @@ index 505dbde..902234a 100644
  
    (cd "${RPM_BUILD_ROOT}/usr"
 -- 
-1.7.9
+1.7.10.3
 

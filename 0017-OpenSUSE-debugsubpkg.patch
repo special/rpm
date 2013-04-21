@@ -1,9 +1,8 @@
-From 10faffa36d39fce706f6082cd25104b939b9a7f6 Mon Sep 17 00:00:00 2001
-From: Carsten Munk <carsten.munk@jollamobile.com>
-Date: Sun, 3 Mar 2013 09:08:15 +0100
-Subject: [PATCH 17/19] OpenSUSE: debugsubpkg
+From ce9c9025d32cdbee665cb5504b2d686faf1f4a7b Mon Sep 17 00:00:00 2001
+From: David Greaves <david@dgreaves.com>
+Date: Wed, 17 Apr 2013 20:41:09 +0000
+Subject: [PATCH] OpenSUSE-debugsubpkg
 
-Signed-off-by: Carsten Munk <carsten.munk@jollamobile.com>
 ---
  build/files.c             |  236 ++++++++++++++++++++++++++++++++++++++++++++-
  macros.in                 |   14 ---
@@ -337,5 +336,5 @@ index c2cb46d..53bd369 100644
  if [ -s "$SOURCEFILE" ]; then
    mkdir -p "${RPM_BUILD_ROOT}/usr/src/debug"
 -- 
-1.7.9
+1.7.10.3
 

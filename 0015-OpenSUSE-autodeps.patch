@@ -1,9 +1,8 @@
-From 941abea7dae55a348fb8a43071bcfb57e8be8c18 Mon Sep 17 00:00:00 2001
-From: Carsten Munk <carsten.munk@jollamobile.com>
-Date: Sun, 3 Mar 2013 09:06:07 +0100
-Subject: [PATCH 15/19] OpenSUSE: autodeps
+From f25d91b336443e6c26182214f0f057755ebdbd09 Mon Sep 17 00:00:00 2001
+From: David Greaves <david@dgreaves.com>
+Date: Wed, 17 Apr 2013 20:41:09 +0000
+Subject: [PATCH] OpenSUSE-autodeps
 
-Signed-off-by: Carsten Munk <carsten.munk@jollamobile.com>
 ---
  autodeps/linux.prov |   70 +++++++++++++++++++++++----------------
  autodeps/linux.req  |   91 +++++++++++++++++++++++++++++----------------------
@@ -276,5 +275,5 @@ index b9a8f99..2f016d0 100644
  
  exit 0
 -- 
-1.7.9
+1.7.10.3
 

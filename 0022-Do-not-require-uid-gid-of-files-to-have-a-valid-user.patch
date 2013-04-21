@@ -1,0 +1,33 @@
+From adb12924e311f08fc38fec7ef53f285a8905a31d Mon Sep 17 00:00:00 2001
+From: David Greaves <david@dgreaves.com>
+Date: Thu, 18 Apr 2013 22:18:52 +0100
+Subject: [PATCH] Do not require uid/gid of files to have a valid
+ username/groupname entry
+
+Signed-off-by: David Greaves <david@dgreaves.com>
+---
+ build/parsePrep.c |    5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/build/parsePrep.c b/build/parsePrep.c
+index 3dab37f..4c96343 100644
+--- a/build/parsePrep.c
++++ b/build/parsePrep.c
+@@ -29,11 +29,12 @@ static rpmRC checkOwners(const char * urlfn)
+ 		urlfn, strerror(errno));
+ 	return RPMRC_FAIL;
+     }
+-    if (!rpmugUname(sb.st_uid) || !rpmugGname(sb.st_gid)) {
++/* Mer does not require uid/gid of files to have a valid username/groupname entry
++	if (!rpmugUname(sb.st_uid) || !rpmugGname(sb.st_gid)) {
+ 	rpmlog(RPMLOG_ERR, _("Bad owner/group: %s\n"), urlfn);
+ 	return RPMRC_FAIL;
+     }
+-
++*/
+     return RPMRC_OK;
+ }
+ 
+-- 
+1.7.10.3
+

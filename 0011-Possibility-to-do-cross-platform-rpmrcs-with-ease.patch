@@ -1,11 +1,11 @@
-From 9394aadc1804bed3fa62396106b925e0b712bfb7 Mon Sep 17 00:00:00 2001
-From: Carsten Munk <carsten.munk@jollamobile.com>
-Date: Sun, 3 Mar 2013 09:01:59 +0100
-Subject: [PATCH 11/19] Possibility to do cross platform rpmrcs with ease
+From 2491eb8aee270396298bc340c793ee4efecf2cc0 Mon Sep 17 00:00:00 2001
+From: David Greaves <david@dgreaves.com>
+Date: Wed, 17 Apr 2013 20:41:09 +0000
+Subject: [PATCH] Possibility-to-do-cross-platform-rpmrcs-with-ease
 
 ---
  installplatform |   10 ++++++++++
- 1 files changed, 10 insertions(+), 0 deletions(-)
+ 1 file changed, 10 insertions(+)
 
 diff --git a/installplatform b/installplatform
 index 44b2243..7a7fbbf 100755
@@ -36,5 +36,5 @@ index 44b2243..7a7fbbf 100755
    [ -L noarch-${OS} ] && rm -f noarch-${OS} 2>/dev/null
    mkdir -p noarch-${OS}
 -- 
-1.7.9
+1.7.10.3
 

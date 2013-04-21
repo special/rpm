@@ -1,12 +1,11 @@
-From deab470162537196fb781bafd34a6e9ff38b44ce Mon Sep 17 00:00:00 2001
-From: Carsten Munk <carsten.munk@jollamobile.com>
-Date: Sun, 3 Mar 2013 09:10:23 +0100
-Subject: [PATCH 19/19] OpenSUSE: elfdeps
+From ea6dec0607d2af46e14201bdc2fd2462eb45848a Mon Sep 17 00:00:00 2001
+From: David Greaves <david@dgreaves.com>
+Date: Wed, 17 Apr 2013 20:41:09 +0000
+Subject: [PATCH] OpenSUSE-elfdeps
 
-Signed-off-by: Carsten Munk <carsten.munk@jollamobile.com>
 ---
  tools/elfdeps.c |    4 +++-
- 1 files changed, 3 insertions(+), 1 deletions(-)
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
 diff --git a/tools/elfdeps.c b/tools/elfdeps.c
 index b523698..8a6d158 100644
@@ -38,5 +37,5 @@ index b523698..8a6d158 100644
  	POPT_TABLEEND
      };
 -- 
-1.7.9
+1.7.10.3
 

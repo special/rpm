@@ -15,9 +15,10 @@
 Summary: The RPM package management system
 Name: rpm-python
 Version: %{rpmver}
-Release: 2
+Release: 11
 BuildRequires: python-devel
-%{expand:%(sed -n -e '/^Source0:/,/^##PYTHON##/p' <%_sourcedir/rpm.spec)}
+# This includes the Source0 => END_OF_INCLUDE_IN_PYTHON_SPEC lines from the main spec file
+%{expand:%(sed -n -e '/^Source0:/,/^##END_OF_INCLUDE_IN_PYTHON_SPEC##/p' <%_sourcedir/rpm.spec)}
 Source100: rpm.spec
 Requires: coreutils
 Requires: db4-utils
@@ -55,6 +56,7 @@ package consists of an archive of files along with information about
 the package like its version, a description, etc.
 
 %prep
+# This includes the %prep section from the main spec file
 %{expand:%(sed -n -e '/^%%prep/,/^%%install/p' <%_sourcedir/rpm.spec | sed -e '1d' -e '$d')}
 %install
 rm -rf $RPM_BUILD_ROOT

@@ -1,11 +1,11 @@
-From 5d411a25adadcd81c5d831a6185ae0d59ffd5a4e Mon Sep 17 00:00:00 2001
+From 0858d9752e154a8141f6260309eb49b5aa69b94e Mon Sep 17 00:00:00 2001
 From: David Greaves <david@dgreaves.com>
-Date: Mon, 25 Jun 2012 23:57:04 +0100
-Subject: [PATCH 01/19] rpm-4.5.90-pkgconfig-path
+Date: Wed, 17 Apr 2013 20:41:08 +0000
+Subject: [PATCH] rpm-4.5.90-pkgconfig-path
 
 ---
  macros.in |    2 ++
- 1 files changed, 2 insertions(+), 0 deletions(-)
+ 1 file changed, 2 insertions(+)
 
 diff --git a/macros.in b/macros.in
 index 3a5bbcd..2e67e64 100644
@@ -21,5 +21,5 @@ index 3a5bbcd..2e67e64 100644
    %{verbose:set -x}%{!verbose:exec > /dev/null}\
    umask 022\
 -- 
-1.7.9
+1.7.10.3
 

@@ -1,9 +1,8 @@
-From e4702ed242c78b1e650ee9396b610c33754169b4 Mon Sep 17 00:00:00 2001
-From: Carsten Munk <carsten.munk@jollamobile.com>
-Date: Sun, 3 Mar 2013 09:08:58 +0100
-Subject: [PATCH 18/19] OpenSUSE: fileattrs
+From c7aacb0fb283f8196ee07d85ed3220028e7ae4c3 Mon Sep 17 00:00:00 2001
+From: David Greaves <david@dgreaves.com>
+Date: Wed, 17 Apr 2013 20:41:09 +0000
+Subject: [PATCH] OpenSUSE-fileattrs
 
-Signed-off-by: Carsten Munk <carsten.munk@jollamobile.com>
 ---
  fileattrs/Makefile.am    |    5 +++--
  fileattrs/debuginfo.attr |    2 ++
@@ -90,5 +89,5 @@ index 0000000..81810e5
 +%__sysvinit_provides	%{_rpmconfigdir}/sysvinitdeps.sh --provides
 +%__sysvinit_path	^/etc/init\.d/
 -- 
-1.7.9
+1.7.10.3
 

@@ -1,12 +1,11 @@
-From 1f371060dc13a8a0089d970d039967e9f750cfe5 Mon Sep 17 00:00:00 2001
-From: Carsten Munk <carsten.munk@jollamobile.com>
-Date: Sun, 3 Mar 2013 09:05:21 +0100
-Subject: [PATCH 14/19] OpenSUSE: finddebuginfo-absolute-links
+From d9748aa36ecb2a653300ce72fbd6b4b85a325f97 Mon Sep 17 00:00:00 2001
+From: David Greaves <david@dgreaves.com>
+Date: Wed, 17 Apr 2013 20:41:09 +0000
+Subject: [PATCH] OpenSUSE-finddebuginfo-absolute-links
 
-Signed-off-by: Carsten Munk <carsten.munk@jollamobile.com>
 ---
  scripts/find-debuginfo.sh |   16 +++++++++++++---
- 1 files changed, 13 insertions(+), 3 deletions(-)
+ 1 file changed, 13 insertions(+), 3 deletions(-)
 
 diff --git a/scripts/find-debuginfo.sh b/scripts/find-debuginfo.sh
 index 0625d3c..c2cb46d 100644
@@ -43,5 +42,5 @@ index 0625d3c..c2cb46d 100644
      echo >&2 "*** WARNING: identical binaries are copied, not linked:"
      echo >&2 "        $file"
 -- 
-1.7.9
+1.7.10.3
 

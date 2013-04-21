@@ -1,11 +1,11 @@
-From 8d15f508d8cfc0fca0e54bc042ca6a4aa5018b00 Mon Sep 17 00:00:00 2001
-From: Carsten Munk <carsten.munk@jollamobile.com>
-Date: Sun, 3 Mar 2013 08:55:47 +0100
-Subject: [PATCH 10/19] rpm disable multilib
+From 015a324b3fdb7737e43f1d236857b690ab43d3e9 Mon Sep 17 00:00:00 2001
+From: David Greaves <david@dgreaves.com>
+Date: Wed, 17 Apr 2013 20:41:09 +0000
+Subject: [PATCH] rpm-disable-multilib
 
 ---
  installplatform |    9 +++++----
- 1 files changed, 5 insertions(+), 4 deletions(-)
+ 1 file changed, 5 insertions(+), 4 deletions(-)
 
 diff --git a/installplatform b/installplatform
 index 1af6c0f..44b2243 100755
@@ -28,5 +28,5 @@ index 1af6c0f..44b2243 100755
      *) LIB=lib;;
    esac
 -- 
-1.7.9
+1.7.10.3
 

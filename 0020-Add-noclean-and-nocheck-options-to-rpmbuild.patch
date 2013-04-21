@@ -1,0 +1,81 @@
+From d2f1ab9e874fd15d6b2a8099508682f23471afe5 Mon Sep 17 00:00:00 2001
+From: Panu Matilainen <pmatilai@redhat.com>
+Date: Thu, 2 Aug 2012 11:49:48 +0300
+Subject: [PATCH] Add --noclean and --nocheck options to rpmbuild
+
+- Ability to skip %clean build stage was requested as RhBug:756531,
+  --nocheck seems otherwise useful to have as %check can take a lot of
+  time, time you might not want to spend for a trivial spec change or such.
+---
+ doc/rpmbuild.8 |    7 +++++++
+ rpmbuild.c     |    8 ++++++++
+ 2 files changed, 15 insertions(+)
+
+diff --git a/doc/rpmbuild.8 b/doc/rpmbuild.8
+index b45a926..5406f4d 100644
+--- a/doc/rpmbuild.8
++++ b/doc/rpmbuild.8
+@@ -33,6 +33,7 @@ rpmbuild \- Build RPM Package(s)
+ 
+  [\fB--buildroot \fIDIRECTORY\fB\fR] [\fB--clean\fR] [\fB--nobuild\fR]
+  [\fB--rmsource\fR] [\fB--rmspec\fR] [\fB--short-circuit\fR]
++ [\fB--noclean\fR] [\fB--nocheck\fR]
+  [\fB--target \fIPLATFORM\fB\fR]
+ 
+ .SH "DESCRIPTION"
+@@ -157,6 +158,12 @@ Remove the build tree after the packages are made.
+ \fB--nobuild\fR
+ Do not execute any build stages. Useful for testing out spec files.
+ .TP
++\fB--noclean\fR
++Do not execute %clean build stage even if present in spec.
++.TP
++\fB--nocheck\fR
++Do not execute %check build stage even if present in spec.
++.TP
+ \fB--nodeps\fR
+ Do not verify build dependencies.
+ .TP
+diff --git a/rpmbuild.c b/rpmbuild.c
+index 9771124..079ecab 100644
+--- a/rpmbuild.c
++++ b/rpmbuild.c
+@@ -55,6 +55,7 @@ static int skipClean = 0;		/*!< from --skip-clean */
+ static int skipPrep = 0;		/*!< from --skip-prep */
+ static char buildMode = 0;		/*!< Build mode (one of "btBC") */
+ static char buildChar = 0;		/*!< Build stage (one of "abcilps ") */
++static rpmBuildFlags nobuildAmount = 0;	/*!< Build stage disablers */
+ static ARGV_t build_targets = NULL;	/*!< Target platform(s) */
+ 
+ static void buildArgCallback( poptContext con,
+@@ -184,6 +185,11 @@ static struct poptOption rpmBuildPoptTable[] = {
+ 	N_("generate package header(s) compatible with (legacy) rpm v3 packaging"),
+ 	NULL},
+ 
++ { "noclean", '\0', POPT_BIT_SET, &nobuildAmount, RPMBUILD_CLEAN,
++	N_("do not execute %clean stage of the build"), NULL },
++ { "nocheck", '\0', POPT_BIT_SET, &nobuildAmount, RPMBUILD_CHECK,
++	N_("do not execute %check stage of the build"), NULL },
++
+  { "nolang", '\0', POPT_ARGFLAG_DOC_HIDDEN, 0, POPT_NOLANG,
+ 	N_("do not accept i18N msgstr's from specfile"), NULL},
+  { "rmsource", '\0', 0, 0, POPT_RMSOURCE,
+@@ -573,6 +579,7 @@ int main(int argc, char *argv[])
+ 	    ba->buildAmount |= RPMBUILD_CLEAN;
+ 	    ba->buildAmount |= RPMBUILD_RMBUILD;
+ 	}
++	ba->buildAmount &= ~(nobuildAmount);
+ 
+ 	while ((pkg = poptGetArg(optCon))) {
+ 	    char * specFile = NULL;
+@@ -622,6 +629,7 @@ int main(int argc, char *argv[])
+ 	    ba->buildAmount |= RPMBUILD_PACKAGESOURCE;
+ 	    break;
+ 	}
++	ba->buildAmount &= ~(nobuildAmount);
+ 
+ 	while ((pkg = poptGetArg(optCon))) {
+ 	    ba->rootdir = rpmcliRootDir;
+-- 
+1.7.10.3
+

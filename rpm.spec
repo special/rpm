@@ -4,45 +4,52 @@
 Summary: The RPM package management system
 Name: rpm
 Version: 4.9.1.2
-Release: 6
+Release: 11
 Source0: http://rpm.org/releases/rpm-4.9.x/rpm-%{version}.tar.bz2
 Source1: libsymlink.attr
+Patch1:	0001-rpm-4.5.90-pkgconfig-path.patch
+Patch2:	0002-rpm-4.8.0-tilde.patch
+Patch3:	0003-rpm-macros.patch
+Patch4:	0004-rpm-4.9.0-meego-arm.patch
+Patch5:	0005-debuginfo.diff.patch
+Patch6:	0006-rpm-shorten-changelog.patch
+Patch7:	0007-rpm-4.7.1-mips64el.patch
+Patch8:	0008-rpm-4.9.1.2-skipprep.patch
+Patch9:	0009-Correct-arm-install.patch
+Patch10:	0010-rpm-disable-multilib.patch
+Patch11:	0011-Possibility-to-do-cross-platform-rpmrcs-with-ease.patch
+Patch12:	0012-openSUSE-finddebuginfo-patch.patch
+Patch13:	0013-Add-debugsource-package-to-rpm-straight-don-t-strip.patch
+Patch14:	0014-OpenSUSE-finddebuginfo-absolute-links.patch
+Patch15:	0015-OpenSUSE-autodeps.patch
+Patch16:	0016-OpenSUSE-buildidprov.patch
+Patch17:	0017-OpenSUSE-debugsubpkg.patch
+Patch18:	0018-OpenSUSE-fileattrs.patch
+Patch19:	0019-OpenSUSE-elfdeps.patch
+Patch20:	0020-Add-noclean-and-nocheck-options-to-rpmbuild.patch
+Patch21:	0021-Add-do-phase-args-and-noprep-arg-for-control-over-bu.patch
+Patch22:	0022-Do-not-require-uid-gid-of-files-to-have-a-valid-user.patch
+Patch23:	0023-Support-build-in-place-to-run-build-and-install-from.patch
 Group: System/Base
 Url: http://www.rpm.org/
 # See also https://github.com/mer-packages/rpm/
 
-Patch0: 0001-rpm-4.5.90-pkgconfig-path.patch
-Patch1: 0002-rpm-4.8.0-tilde.patch
-Patch2: 0003-rpm-macros.patch
-Patch3: 0004-rpm-4.9.0-meego-arm.patch
-Patch4: 0005-debuginfo.diff.patch
-Patch5: 0006-rpm-shorten-changelog.patch
-Patch6: 0007-rpm-4.7.1-mips64el.patch
-Patch7: 0008-rpm-4.9.1.2-skipprep.patch
-Patch8: 0009-Correct-arm-install.patch
-Patch9: 0010-rpm-disable-multilib.patch
-Patch10: 0011-Possibility-to-do-cross-platform-rpmrcs-with-ease.patch
-Patch11: 0012-openSUSE-finddebuginfo-patch.patch
-Patch12: 0013-Add-debugsource-package-to-rpm-straight-don-t-strip-.patch
-Patch13: 0014-OpenSUSE-finddebuginfo-absolute-links.patch
-Patch14: 0015-OpenSUSE-autodeps.patch
-Patch15: 0016-OpenSUSE-buildidprov.patch
-Patch16: 0017-OpenSUSE-debugsubpkg.patch
-Patch17: 0018-OpenSUSE-fileattrs.patch
-Patch18: 0019-OpenSUSE-elfdeps.patch
 
 
 # Partially GPL/LGPL dual-licensed and some bits with BSD
 # SourceLicense: (GPLv2+ and LGPLv2+ with exceptions) and BSD 
 License: GPLv2+
-##PYTHON##
+##END_OF_INCLUDE_IN_PYTHON_SPEC##
 
 Requires: curl
 Requires: coreutils
 Requires: db4-utils
 BuildRequires: db4-devel
 
-BuildRequires: %{_vendor}-rpm-config
+BuildRequires: meego-rpm-config
+BuildRequires: autoconf
+BuildRequires: automake
+BuildRequires: libtool
 BuildRequires: gawk
 BuildRequires: elfutils-devel >= 0.112
 BuildRequires: elfutils-libelf-devel
@@ -138,6 +145,11 @@ that will manipulate RPM packages and databases.
 %patch16 -p1
 %patch17 -p1
 %patch18 -p1
+%patch19 -p1
+%patch20 -p1
+%patch21 -p1
+%patch22 -p1
+%patch23 -p1
 
 %build
 CPPFLAGS="$CPPFLAGS `pkg-config --cflags nss`"
