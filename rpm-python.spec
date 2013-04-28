@@ -56,7 +56,7 @@ package consists of an archive of files along with information about
 the package like its version, a description, etc.
 
 %prep
-# This includes the %prep section from the main spec file
+# This includes the %%prep section from the main spec file
 %{expand:%(sed -n -e '/^%%prep/,/^%%install/p' <%_sourcedir/rpm.spec | sed -e '1d' -e '$d')}
 %install
 rm -rf $RPM_BUILD_ROOT
