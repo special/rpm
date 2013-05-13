@@ -1,3 +1,6 @@
+* Mon May 13 2013 David Greaves <david@dgreaves.com> - 4.9.1.2-12
+- Fixes to --build-in-place option
+
 * Sun Apr 21 2013 David Greaves <david@dgreaves.com> - 4.9.1.2-11
 - Support --build-in-place to run build and install from CWD
 - Do not require uid/gid of files to have a valid username/groupname entry

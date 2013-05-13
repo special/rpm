@@ -1,51 +1,50 @@
-From 282764de77b8d2ceaa73fff5cd907333f18df56b Mon Sep 17 00:00:00 2001
+From e23637f5a6838b3f9a96927bd5e64fe9d76be2ea Mon Sep 17 00:00:00 2001
 From: David Greaves <david@dgreaves.com>
 Date: Fri, 19 Apr 2013 19:50:14 +0100
 Subject: [PATCH] Support --build-in-place to run build and install from CWD
 
 Control using _build_in_place macro which can be set by the new arg
 
-Causes the cd to builddir and any handling of -n in the %setup script
-to be skipped.
+Sets _builddir macro to cwd and skips handling of -n and untar in the
+%setup script.
 
 Signed-off-by: David Greaves <david@dgreaves.com>
 ---
- build/parsePrep.c |   11 ++++++++++-
- rpmbuild.c        |    7 +++++++
- 2 files changed, 17 insertions(+), 1 deletion(-)
+ build/parsePrep.c |   10 ++++++++++
+ rpmbuild.c        |   15 +++++++++++++++
+ 2 files changed, 25 insertions(+)
 
 diff --git a/build/parsePrep.c b/build/parsePrep.c
-index 4c96343..6cf352b 100644
+index 4c96343..2808d63 100644
 --- a/build/parsePrep.c
 +++ b/build/parsePrep.c
 @@ -262,6 +262,7 @@ static int doSetupMacro(rpmSpec spec, const char *line)
      uint32_t num;
      int leaveDirs = 0, skipDefaultAction = 0;
      int createDir = 0, quietly = 0;
-+	int buildInPlace = 0;
++    int buildInPlace = 0;
      const char * dirName = NULL;
      struct poptOption optionsTable[] = {
  	    { NULL, 'a', POPT_ARG_STRING, NULL, 'a',	NULL, NULL},
-@@ -315,8 +316,16 @@ static int doSetupMacro(rpmSpec spec, const char *line)
+@@ -315,7 +316,16 @@ static int doSetupMacro(rpmSpec spec, const char *line)
  		  headerGetString(spec->packages->header, RPMTAG_NAME),
  		  headerGetString(spec->packages->header, RPMTAG_VERSION));
      }
-+	/* Mer addition - support --build-in-place */
-+	if (rpmExpandNumeric("_build_in_place")) {
-+		buildInPlace = 1;
-+		spec->buildSubdir = xstrdup(".");
-+	}
++    /* Mer addition - support --build-in-place */
++    if (rpmExpandNumeric("%{_build_in_place}")) {
++	buildInPlace = 1;
++	spec->buildSubdir = NULL;
++    }
      addMacro(spec->macros, "buildsubdir", NULL, spec->buildSubdir, RMIL_SPEC);
--    
-+	if (buildInPlace) {
-+		goto exit;
-+	}
-+
++    if (buildInPlace) {
++	rc = RPMRC_OK;
++	goto exit;
++    }
+     
      /* cd to the build dir */
      {	char * buildDir = rpmGenPath(spec->rootDir, "%{_builddir}", "");
- 
 diff --git a/rpmbuild.c b/rpmbuild.c
-index 32f49d3..e59e313 100644
+index 32f49d3..90c54b4 100644
 --- a/rpmbuild.c
 +++ b/rpmbuild.c
 @@ -28,6 +28,7 @@ static struct rpmBuildArguments_s rpmBTArgs;
@@ -56,18 +55,26 @@ index 32f49d3..e59e313 100644
  
  #define	POPT_REBUILD		0x4220
  #define	POPT_RECOMPILE		0x4320
-@@ -112,6 +113,10 @@ static void buildArgCallback( poptContext con,
+@@ -58,6 +59,7 @@ static char buildChar = 0;		/*!< Build stage (one of "abcilps ") */
+ static rpmBuildFlags nobuildAmount = 0;	/*!< Build stage disablers */
+ static rpmBuildFlags dobuildAmount = 0;	/*!< Build stage enablers */
+ static ARGV_t build_targets = NULL;	/*!< Target platform(s) */
++static int buildInPlace = 0;		/*!< from --build-in-place */
+ 
+ static void buildArgCallback( poptContext con,
+ 	enum poptCallbackReason reason,
+@@ -112,6 +114,10 @@ static void buildArgCallback( poptContext con,
  	spec_flags |= RPMSPEC_FORCE;
  	break;
  
 +    case POPT_BUILDINPLACE:
 +	rpmDefineMacro(NULL, "_build_in_place 1", 0);
++	buildInPlace = 1;
 +	break;
-+
      }
  }
  
-@@ -191,6 +196,8 @@ static struct poptOption rpmBuildPoptTable[] = {
+@@ -191,6 +197,8 @@ static struct poptOption rpmBuildPoptTable[] = {
  
   { "buildroot", '\0', POPT_ARG_STRING, 0,  POPT_BUILDROOT,
  	N_("override build root"), "DIRECTORY" },
@@ -76,6 +83,20 @@ index 32f49d3..e59e313 100644
   { "clean", '\0', 0, 0, POPT_RMBUILD,
  	N_("remove build tree when done"), NULL},
   { "force", '\0', POPT_ARGFLAG_DOC_HIDDEN, 0, RPMCLI_POPT_FORCE,
+@@ -405,6 +413,13 @@ static int buildForTarget(rpmts ts, const char * arg, BTA_t ba)
+     rpmSetTables(RPM_MACHTABLE_BUILDARCH, RPM_MACHTABLE_BUILDOS);
+ #endif
+ 
++    /* Override default BUILD value for _builddir */
++    if (buildInPlace) {
++	char *cwd = rpmGetCwd();
++	addMacro(NULL, "_builddir", NULL, cwd, 0);		
++	free(cwd);
++    }
++    
+     if (ba->buildRootOverride)
+ 	buildRootURL = rpmGenPath(NULL, ba->buildRootOverride, NULL);
+ 
 -- 
 1.7.10.3
 
