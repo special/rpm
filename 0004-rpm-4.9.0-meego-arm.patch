@@ -4,9 +4,9 @@ Date: Wed, 17 Apr 2013 20:41:08 +0000
 Subject: [PATCH] rpm-4.9.0-meego-arm
 
 ---
- installplatform |    3 ++-
- macros.in       |    2 +-
- rpmrc.in        |   22 ++++++++++++++++++++++
+ installplatform |  3 ++-
+ macros.in       |  2 +-
+ rpmrc.in        | 22 ++++++++++++++++++++++
  3 files changed, 25 insertions(+), 2 deletions(-)
 
 diff --git a/installplatform b/installplatform
@@ -98,5 +98,5 @@ index 0033bbd..9f1eaca 100644
  buildarch_compat: hppa1.2: hppa1.1
  buildarch_compat: hppa1.1: hppa1.0
 -- 
-1.7.10.3
+1.8.3-rc3
 

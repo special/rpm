@@ -1,0 +1,27 @@
+From 1e4d79aea648cdeb84971c88742b7752df735a66 Mon Sep 17 00:00:00 2001
+From: David Greaves <david@dgreaves.com>
+Date: Wed, 3 Jul 2013 09:18:28 +0100
+Subject: [PATCH] [macros] Support 'noecho' macro to quieten build scriptlets
+ whilst allowing command output
+
+Signed-off-by: David Greaves <david.greaves@jollamobile.com>
+---
+ macros.in | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/macros.in b/macros.in
+index 2819ed7..ceb30ef 100644
+--- a/macros.in
++++ b/macros.in
+@@ -691,7 +691,7 @@ print (t)\
+   PKG_CONFIG_PATH=\"%{_libdir}/pkgconfig:%{_datadir}/pkgconfig\"\
+   export PKG_CONFIG_PATH\
+   \
+-  %{verbose:set -x}%{!verbose:exec > /dev/null}\
++  %{verbose:%{!noecho:set -x}}%{!verbose:exec > /dev/null}\
+   umask 022\
+   cd \"%{u2p:%{_builddir}}\"\
+ 
+-- 
+1.8.3-rc3
+

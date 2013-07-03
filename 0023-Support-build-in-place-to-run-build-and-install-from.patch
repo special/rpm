@@ -10,8 +10,8 @@ Sets _builddir macro to cwd and skips handling of -n and untar in the
 
 Signed-off-by: David Greaves <david@dgreaves.com>
 ---
- build/parsePrep.c |   10 ++++++++++
- rpmbuild.c        |   15 +++++++++++++++
+ build/parsePrep.c | 10 ++++++++++
+ rpmbuild.c        | 15 +++++++++++++++
  2 files changed, 25 insertions(+)
 
 diff --git a/build/parsePrep.c b/build/parsePrep.c
@@ -98,5 +98,5 @@ index 32f49d3..90c54b4 100644
  	buildRootURL = rpmGenPath(NULL, ba->buildRootOverride, NULL);
  
 -- 
-1.7.10.3
+1.8.3-rc3
 

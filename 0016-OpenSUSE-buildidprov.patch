@@ -4,9 +4,9 @@ Date: Wed, 17 Apr 2013 20:41:09 +0000
 Subject: [PATCH] OpenSUSE-buildidprov
 
 ---
- autodeps/linux.prov    |    8 ++++++++
- macros.in              |    3 ++-
- scripts/debuginfo.prov |   12 ++++++++++++
+ autodeps/linux.prov    |  8 ++++++++
+ macros.in              |  3 ++-
+ scripts/debuginfo.prov | 12 ++++++++++++
  3 files changed, 22 insertions(+), 1 deletion(-)
  create mode 100644 scripts/debuginfo.prov
 
@@ -69,5 +69,5 @@ index 0000000..4d99257
 +    esac
 +done
 -- 
-1.7.10.3
+1.8.3-rc3
 

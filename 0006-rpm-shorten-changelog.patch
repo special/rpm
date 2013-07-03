@@ -4,8 +4,8 @@ Date: Wed, 17 Apr 2013 20:41:08 +0000
 Subject: [PATCH] rpm-shorten-changelog
 
 ---
- build/pack.c           |   58 ++++++++++++++++++++++++++++++++++++++++++++++++
- build/parseChangelog.c |    5 +++++
+ build/pack.c           | 58 ++++++++++++++++++++++++++++++++++++++++++++++++++
+ build/parseChangelog.c |  5 +++++
  2 files changed, 63 insertions(+)
 
 diff --git a/build/pack.c b/build/pack.c
@@ -101,5 +101,5 @@ index d4681cb..0c02051 100644
  	name = s;
  	while (*s != '\0') s++;
 -- 
-1.7.10.3
+1.8.3-rc3
 

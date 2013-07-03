@@ -4,7 +4,7 @@ Date: Wed, 17 Apr 2013 20:41:09 +0000
 Subject: [PATCH] rpm-disable-multilib
 
 ---
- installplatform |    9 +++++----
+ installplatform | 9 +++++----
  1 file changed, 5 insertions(+), 4 deletions(-)
 
 diff --git a/installplatform b/installplatform
@@ -28,5 +28,5 @@ index 1af6c0f..44b2243 100755
      *) LIB=lib;;
    esac
 -- 
-1.7.10.3
+1.8.3-rc3
 

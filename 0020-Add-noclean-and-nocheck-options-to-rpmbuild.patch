@@ -7,8 +7,8 @@ Subject: [PATCH] Add --noclean and --nocheck options to rpmbuild
   --nocheck seems otherwise useful to have as %check can take a lot of
   time, time you might not want to spend for a trivial spec change or such.
 ---
- doc/rpmbuild.8 |    7 +++++++
- rpmbuild.c     |    8 ++++++++
+ doc/rpmbuild.8 | 7 +++++++
+ rpmbuild.c     | 8 ++++++++
  2 files changed, 15 insertions(+)
 
 diff --git a/doc/rpmbuild.8 b/doc/rpmbuild.8
@@ -77,5 +77,5 @@ index 9771124..079ecab 100644
  	while ((pkg = poptGetArg(optCon))) {
  	    ba->rootdir = rpmcliRootDir;
 -- 
-1.7.10.3
+1.8.3-rc3
 

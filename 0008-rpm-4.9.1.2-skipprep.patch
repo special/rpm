@@ -4,7 +4,7 @@ Date: Wed, 17 Apr 2013 20:41:08 +0000
 Subject: [PATCH] rpm-4.9.1.2-skipprep
 
 ---
- rpmbuild.c |   12 ++++++++++--
+ rpmbuild.c | 12 ++++++++++--
  1 file changed, 10 insertions(+), 2 deletions(-)
 
 diff --git a/rpmbuild.c b/rpmbuild.c
@@ -52,5 +52,5 @@ index 856798a..9771124 100644
  	    
  	case 'l':
 -- 
-1.7.10.3
+1.8.3-rc3
 

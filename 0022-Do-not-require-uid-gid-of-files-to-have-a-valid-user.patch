@@ -6,7 +6,7 @@ Subject: [PATCH] Do not require uid/gid of files to have a valid
 
 Signed-off-by: David Greaves <david@dgreaves.com>
 ---
- build/parsePrep.c |    5 +++--
+ build/parsePrep.c | 5 +++--
  1 file changed, 3 insertions(+), 2 deletions(-)
 
 diff --git a/build/parsePrep.c b/build/parsePrep.c
@@ -29,5 +29,5 @@ index 3dab37f..4c96343 100644
  }
  
 -- 
-1.7.10.3
+1.8.3-rc3
 

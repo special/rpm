@@ -4,7 +4,7 @@ Date: Wed, 17 Apr 2013 20:41:09 +0000
 Subject: [PATCH] OpenSUSE-elfdeps
 
 ---
- tools/elfdeps.c |    4 +++-
+ tools/elfdeps.c | 4 +++-
  1 file changed, 3 insertions(+), 1 deletion(-)
 
 diff --git a/tools/elfdeps.c b/tools/elfdeps.c
@@ -37,5 +37,5 @@ index b523698..8a6d158 100644
  	POPT_TABLEEND
      };
 -- 
-1.7.10.3
+1.8.3-rc3
 

@@ -4,9 +4,9 @@ Date: Wed, 17 Apr 2013 20:41:09 +0000
 Subject: [PATCH] OpenSUSE-debugsubpkg
 
 ---
- build/files.c             |  236 ++++++++++++++++++++++++++++++++++++++++++++-
- macros.in                 |   14 ---
- scripts/find-debuginfo.sh |   18 +---
+ build/files.c             | 236 +++++++++++++++++++++++++++++++++++++++++++++-
+ macros.in                 |  14 ---
+ scripts/find-debuginfo.sh |  18 +---
  3 files changed, 239 insertions(+), 29 deletions(-)
 
 diff --git a/build/files.c b/build/files.c
@@ -336,5 +336,5 @@ index c2cb46d..53bd369 100644
  if [ -s "$SOURCEFILE" ]; then
    mkdir -p "${RPM_BUILD_ROOT}/usr/src/debug"
 -- 
-1.7.10.3
+1.8.3-rc3
 

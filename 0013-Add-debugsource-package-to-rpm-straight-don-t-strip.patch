@@ -4,8 +4,8 @@ Date: Wed, 17 Apr 2013 20:41:09 +0000
 Subject: [PATCH] Add-debugsource-package-to-rpm-straight-don-t-strip-
 
 ---
- macros.in                 |   12 ++++++++++++
- scripts/find-debuginfo.sh |   12 +++++++++---
+ macros.in                 | 12 ++++++++++++
+ scripts/find-debuginfo.sh | 12 +++++++++---
  2 files changed, 21 insertions(+), 3 deletions(-)
 
 diff --git a/macros.in b/macros.in
@@ -65,5 +65,5 @@ index 902234a..0625d3c 100644
  append_uniq()
  {
 -- 
-1.7.10.3
+1.8.3-rc3
 

@@ -4,7 +4,7 @@ Date: Wed, 17 Apr 2013 20:41:09 +0000
 Subject: [PATCH] OpenSUSE-finddebuginfo-absolute-links
 
 ---
- scripts/find-debuginfo.sh |   16 +++++++++++++---
+ scripts/find-debuginfo.sh | 16 +++++++++++++---
  1 file changed, 13 insertions(+), 3 deletions(-)
 
 diff --git a/scripts/find-debuginfo.sh b/scripts/find-debuginfo.sh
@@ -42,5 +42,5 @@ index 0625d3c..c2cb46d 100644
      echo >&2 "*** WARNING: identical binaries are copied, not linked:"
      echo >&2 "        $file"
 -- 
-1.7.10.3
+1.8.3-rc3
 

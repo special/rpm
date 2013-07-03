@@ -1,3 +1,9 @@
+* Wed Jul 03 2013 David Greaves <david@dgreaves.com> - 4.9.1.2-14
+- Support 'noecho' macro to quieten build scriptlets whilst allowing command output
+
+* Wed May 22 2013 David Greaves <david@dgreaves.com> - 4.9.1.2-13
+- add new dbi flag: really_nodbsync
+
 * Mon May 13 2013 David Greaves <david@dgreaves.com> - 4.9.1.2-12
 - Fixes to --build-in-place option
 

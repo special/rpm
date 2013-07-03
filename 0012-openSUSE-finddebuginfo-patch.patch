@@ -4,7 +4,7 @@ Date: Wed, 17 Apr 2013 20:41:09 +0000
 Subject: [PATCH] openSUSE-finddebuginfo-patch
 
 ---
- scripts/find-debuginfo.sh |   69 ++++++++++++++++++++++++++++++++++-----------
+ scripts/find-debuginfo.sh | 69 ++++++++++++++++++++++++++++++++++++-----------
  1 file changed, 53 insertions(+), 16 deletions(-)
 
 diff --git a/scripts/find-debuginfo.sh b/scripts/find-debuginfo.sh
@@ -129,5 +129,5 @@ index 505dbde..902234a 100644
  
    (cd "${RPM_BUILD_ROOT}/usr"
 -- 
-1.7.10.3
+1.8.3-rc3
 

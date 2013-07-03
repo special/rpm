@@ -4,7 +4,7 @@ Date: Wed, 17 Apr 2013 20:41:08 +0000
 Subject: [PATCH] debuginfo.diff
 
 ---
- macros.in |    9 ++++-----
+ macros.in | 9 ++++-----
  1 file changed, 4 insertions(+), 5 deletions(-)
 
 diff --git a/macros.in b/macros.in
@@ -36,5 +36,5 @@ index e8b359b..5aaa503 100644
  
  %_defaultdocdir		%{_datadir}/doc
 -- 
-1.7.10.3
+1.8.3-rc3
 

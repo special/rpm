@@ -4,7 +4,7 @@ Date: Wed, 17 Apr 2013 20:41:08 +0000
 Subject: [PATCH] rpm-4.5.90-pkgconfig-path
 
 ---
- macros.in |    2 ++
+ macros.in | 2 ++
  1 file changed, 2 insertions(+)
 
 diff --git a/macros.in b/macros.in
@@ -21,5 +21,5 @@ index 3a5bbcd..2e67e64 100644
    %{verbose:set -x}%{!verbose:exec > /dev/null}\
    umask 022\
 -- 
-1.7.10.3
+1.8.3-rc3
 

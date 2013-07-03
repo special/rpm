@@ -4,9 +4,9 @@ Date: Wed, 17 Apr 2013 20:41:08 +0000
 Subject: [PATCH] rpm-macros
 
 ---
- configure.ac    |    1 +
- installplatform |    3 +++
- platform.in     |   20 ++++++++++++++++++++
+ configure.ac    |  1 +
+ installplatform |  3 +++
+ platform.in     | 20 ++++++++++++++++++++
  3 files changed, 24 insertions(+)
 
 diff --git a/configure.ac b/configure.ac
@@ -67,5 +67,5 @@ index a04d8fc..1b8eeb8 100644
  @apple@#---------------------------------------------------------------------
  @apple@#	Apple Darwin vendor specific macros
 -- 
-1.7.10.3
+1.8.3-rc3
 

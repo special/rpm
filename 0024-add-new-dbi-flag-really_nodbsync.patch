@@ -1,0 +1,55 @@
+From f75e8c7c66734962018c14e1b8f31f8ec211b2d8 Mon Sep 17 00:00:00 2001
+From: David Greaves <david@dgreaves.com>
+Date: Wed, 22 May 2013 13:57:38 +0100
+Subject: [PATCH] add new dbi flag: really_nodbsync
+
+Signed-off-by: David Greaves <david.greaves@jollamobile.com>
+---
+ lib/backend/db3.c      | 2 +-
+ lib/backend/dbconfig.c | 4 ++++
+ lib/backend/dbi.h      | 1 +
+ 3 files changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/lib/backend/db3.c b/lib/backend/db3.c
+index ff55791..faaf016 100644
+--- a/lib/backend/db3.c
++++ b/lib/backend/db3.c
+@@ -221,7 +221,7 @@ int dbiSync(dbiIndex dbi, unsigned int flags)
+     DB * db = dbi->dbi_db;
+     int rc = 0;
+ 
+-    if (db != NULL && !dbi->dbi_no_dbsync) {
++    if (db != NULL) && (!dbi->dbi_no_dbsync || !dbi->dbi_really_no_dbsync) {
+ 	rc = db->sync(db, flags);
+ 	rc = cvtdberr(dbi, "db->sync", rc, _debug);
+     }
+diff --git a/lib/backend/dbconfig.c b/lib/backend/dbconfig.c
+index 9e81476..03c9c85 100644
+--- a/lib/backend/dbconfig.c
++++ b/lib/backend/dbconfig.c
+@@ -67,6 +67,10 @@ static const struct poptOption rdbOptions[] = {
+ 
+  { "nodbsync",	0,POPT_ARG_NONE,	&staticdbi.dbi_no_dbsync, 0,
+ 	NULL, NULL },
++
++ { "really_nodbsync", 0,POPT_ARG_NONE,        &staticdbi.dbi_really_no_dbsync, 0,
++        NULL, NULL },
++
+  { "lockdbfd",	0,POPT_ARG_NONE,	&staticdbi.dbi_lockdbfd, 0,
+ 	NULL, NULL },
+ 
+diff --git a/lib/backend/dbi.h b/lib/backend/dbi.h
+index f37a160..4abbea2 100644
+--- a/lib/backend/dbi.h
++++ b/lib/backend/dbi.h
+@@ -76,6 +76,7 @@ struct _dbiIndex {
+     int	dbi_oflags;		/*!< db->open flags */
+     int	dbi_permit_dups;	/*!< permit duplicate entries? */
+     int	dbi_no_dbsync;		/*!< don't call dbiSync */
++    int        dbi_really_no_dbsync;        /*!< really don't call dbiSync */
+     int	dbi_lockdbfd;		/*!< do fcntl lock on db fd */
+     int	dbi_byteswapped;
+ 
+-- 
+1.8.3-rc3
+

@@ -4,8 +4,8 @@ Date: Wed, 17 Apr 2013 20:41:09 +0000
 Subject: [PATCH] OpenSUSE-autodeps
 
 ---
- autodeps/linux.prov |   70 +++++++++++++++++++++++----------------
- autodeps/linux.req  |   91 +++++++++++++++++++++++++++++----------------------
+ autodeps/linux.prov | 70 ++++++++++++++++++++++++-----------------
+ autodeps/linux.req  | 91 ++++++++++++++++++++++++++++++-----------------------
  2 files changed, 93 insertions(+), 68 deletions(-)
 
 diff --git a/autodeps/linux.prov b/autodeps/linux.prov
@@ -275,5 +275,5 @@ index b9a8f99..2f016d0 100644
  
  exit 0
 -- 
-1.7.10.3
+1.8.3-rc3
 

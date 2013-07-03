@@ -4,7 +4,7 @@
 Summary: The RPM package management system
 Name: rpm
 Version: 4.9.1.2
-Release: 12
+Release: 14
 Source0: http://rpm.org/releases/rpm-4.9.x/rpm-%{version}.tar.bz2
 Source1: libsymlink.attr
 Patch1:	0001-rpm-4.5.90-pkgconfig-path.patch
@@ -30,6 +30,8 @@ Patch20:	0020-Add-noclean-and-nocheck-options-to-rpmbuild.patch
 Patch21:	0021-Add-do-phase-args-and-noprep-arg-for-control-over-bu.patch
 Patch22:	0022-Do-not-require-uid-gid-of-files-to-have-a-valid-user.patch
 Patch23:	0023-Support-build-in-place-to-run-build-and-install-from.patch
+Patch24:	0024-add-new-dbi-flag-really_nodbsync.patch
+Patch25:	0025-macros-Support-noecho-macro-to-quieten-build-scriptl.patch
 Group: System/Base
 Url: http://www.rpm.org/
 # See also https://github.com/mer-packages/rpm/
@@ -150,6 +152,8 @@ that will manipulate RPM packages and databases.
 %patch21 -p1
 %patch22 -p1
 %patch23 -p1
+%patch24 -p1
+%patch25 -p1
 
 %build
 CPPFLAGS="$CPPFLAGS `pkg-config --cflags nss`"

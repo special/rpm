@@ -15,7 +15,7 @@
 Summary: The RPM package management system
 Name: rpm-python
 Version: %{rpmver}
-Release: 11
+Release: 14
 BuildRequires: python-devel
 # This includes the Source0 => END_OF_INCLUDE_IN_PYTHON_SPEC lines from the main spec file
 %{expand:%(sed -n -e '/^Source0:/,/^##END_OF_INCLUDE_IN_PYTHON_SPEC##/p' <%_sourcedir/rpm.spec)}

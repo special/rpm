@@ -4,13 +4,13 @@ Date: Wed, 17 Apr 2013 20:41:09 +0000
 Subject: [PATCH] OpenSUSE-fileattrs
 
 ---
- fileattrs/Makefile.am    |    5 +++--
- fileattrs/debuginfo.attr |    2 ++
- fileattrs/elf.attr       |    3 ++-
- fileattrs/elflib.attr    |    4 ++++
- fileattrs/firmware.attr  |    2 ++
- fileattrs/ksyms.attr     |    4 ++++
- fileattrs/sysvinit.attr  |    2 ++
+ fileattrs/Makefile.am    | 5 +++--
+ fileattrs/debuginfo.attr | 2 ++
+ fileattrs/elf.attr       | 3 ++-
+ fileattrs/elflib.attr    | 4 ++++
+ fileattrs/firmware.attr  | 2 ++
+ fileattrs/ksyms.attr     | 4 ++++
+ fileattrs/sysvinit.attr  | 2 ++
  7 files changed, 19 insertions(+), 3 deletions(-)
  create mode 100644 fileattrs/debuginfo.attr
  create mode 100644 fileattrs/elflib.attr
@@ -89,5 +89,5 @@ index 0000000..81810e5
 +%__sysvinit_provides	%{_rpmconfigdir}/sysvinitdeps.sh --provides
 +%__sysvinit_path	^/etc/init\.d/
 -- 
-1.7.10.3
+1.8.3-rc3
 
