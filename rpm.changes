@@ -1,3 +1,6 @@
+* Wed Jul 03 2013 David Greaves <david@dgreaves.com> - 4.9.1.2-15
+- Fixup () in really_nodbsync code
+
 * Wed Jul 03 2013 David Greaves <david@dgreaves.com> - 4.9.1.2-14
 - Support 'noecho' macro to quieten build scriptlets whilst allowing command output
 

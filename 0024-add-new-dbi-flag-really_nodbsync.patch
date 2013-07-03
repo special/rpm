@@ -1,4 +1,4 @@
-From f75e8c7c66734962018c14e1b8f31f8ec211b2d8 Mon Sep 17 00:00:00 2001
+From e9de0733dd7f5ccb9fdd29e1128d34802d911350 Mon Sep 17 00:00:00 2001
 From: David Greaves <david@dgreaves.com>
 Date: Wed, 22 May 2013 13:57:38 +0100
 Subject: [PATCH] add new dbi flag: really_nodbsync
@@ -11,7 +11,7 @@ Signed-off-by: David Greaves <david.greaves@jollamobile.com>
  3 files changed, 6 insertions(+), 1 deletion(-)
 
 diff --git a/lib/backend/db3.c b/lib/backend/db3.c
-index ff55791..faaf016 100644
+index ff55791..ff8db45 100644
 --- a/lib/backend/db3.c
 +++ b/lib/backend/db3.c
 @@ -221,7 +221,7 @@ int dbiSync(dbiIndex dbi, unsigned int flags)
@@ -19,7 +19,7 @@ index ff55791..faaf016 100644
      int rc = 0;
  
 -    if (db != NULL && !dbi->dbi_no_dbsync) {
-+    if (db != NULL) && (!dbi->dbi_no_dbsync || !dbi->dbi_really_no_dbsync) {
++    if ((db != NULL) && (!dbi->dbi_no_dbsync || !dbi->dbi_really_no_dbsync)) {
  	rc = db->sync(db, flags);
  	rc = cvtdberr(dbi, "db->sync", rc, _debug);
      }
