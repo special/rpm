@@ -4,7 +4,7 @@
 Summary: The RPM package management system
 Name: rpm
 Version: 4.9.1.2
-Release: 15
+Release: 16
 Source0: http://rpm.org/releases/rpm-4.9.x/rpm-%{version}.tar.bz2
 Source1: libsymlink.attr
 Patch1:	0001-rpm-4.5.90-pkgconfig-path.patch
