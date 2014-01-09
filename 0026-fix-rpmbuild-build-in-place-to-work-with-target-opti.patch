@@ -1,0 +1,32 @@
+From a9c89838aa1bab098e6ae5a91ebd6a8185c16d12 Mon Sep 17 00:00:00 2001
+From: Juha Kallioinen <juha.kallioinen@jolla.com>
+Date: Wed, 8 Jan 2014 19:42:22 +0200
+Subject: [PATCH] fix rpmbuild build-in-place to work with target option
+
+Fixes the case when --target= and --build-in-place are both given to
+rpmbuild. The build-in-place macro was reset when looping all the
+given targets and rpmbuild ended up requiring a tarball.
+
+Signed-off-by: Juha Kallioinen <juha.kallioinen@jolla.com>
+---
+ rpmbuild.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/rpmbuild.c b/rpmbuild.c
+index 90c54b4..e5af11f 100644
+--- a/rpmbuild.c
++++ b/rpmbuild.c
+@@ -552,6 +552,10 @@ static int build(rpmts ts, const char * arg, BTA_t ba, const char * rcfile)
+ 
+ 	/* Read in configuration for target. */
+ 	rpmFreeMacros(NULL);
++	if (buildInPlace) {
++		/* Need to redefine this after freeing all the macros */
++		rpmDefineMacro(NULL, "_build_in_place 1", 0);
++	}
+ 	rpmFreeRpmrc();
+ 	(void) rpmReadConfigFiles(rcfile, *target);
+ 	rc = buildForTarget(ts, arg, ba);
+-- 
+1.8.3-rc3
+

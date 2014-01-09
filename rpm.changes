@@ -1,3 +1,6 @@
+* Wed Jan 08 2014 Juha Kallioinen <juha.kallioinen@jolla.com> - 4.9.1.2-17
+- [rpmbuild] Fix simultaneous build-in-place and target opts for rpmbuild case
+
 * Thu Jul 04 2013 David Greaves <david@dgreaves.com> - 4.9.1.2-16
 - [macros] Fix typo in macro
 
