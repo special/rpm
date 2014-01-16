@@ -4,7 +4,7 @@
 Summary: The RPM package management system
 Name: rpm
 Version: 4.9.1.2
-Release: 17
+Release: 18
 Source0: http://rpm.org/releases/rpm-4.9.x/rpm-%{version}.tar.bz2
 Source1: libsymlink.attr
 Patch1:	0001-rpm-4.5.90-pkgconfig-path.patch
@@ -33,6 +33,7 @@ Patch23:	0023-Support-build-in-place-to-run-build-and-install-from.patch
 Patch24:	0024-add-new-dbi-flag-really_nodbsync.patch
 Patch25:	0025-macros-Support-noecho-macro-to-quieten-build-scriptl.patch
 Patch26:	0026-fix-rpmbuild-build-in-place-to-work-with-target-opti.patch
+Patch27:	0027-Implement-macro-to-skip-install-processing-step.patch
 Group: System/Base
 Url: http://www.rpm.org/
 # See also https://github.com/mer-packages/rpm/
@@ -156,6 +157,7 @@ that will manipulate RPM packages and databases.
 %patch24 -p1
 %patch25 -p1
 %patch26 -p1
+%patch27 -p1
 
 %build
 CPPFLAGS="$CPPFLAGS `pkg-config --cflags nss`"

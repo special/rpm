@@ -1,3 +1,6 @@
+* Thu Jan 16 2014 Juha Kallioinen <juha.kallioinen@jolla.com> - 4.9.1.2-18
+- [rpmbuild] Implement macro to speed up install step
+
 * Wed Jan 08 2014 Juha Kallioinen <juha.kallioinen@jolla.com> - 4.9.1.2-17
 - [rpmbuild] Fix simultaneous build-in-place and target opts for rpmbuild case
 
