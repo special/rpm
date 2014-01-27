@@ -1,0 +1,101 @@
+diff -ru rpm-4.9.1.2/configure rpm-4.9.1.2-aarch64/configure
+--- rpm-4.9.1.2/configure	2011-09-29 12:15:17.000000000 +0000
++++ rpm-4.9.1.2-aarch64/configure	2013-12-30 14:28:40.000000000 +0000
+@@ -24238,6 +24238,7 @@
+ m68k*)		RPMCANONCOLOR=0; RPMCANONARCH=m68k ;;
+ sh3*)		RPMCANONCOLOR=0; RPMCANONARCH=sh3 ;;
+ sh4*)		RPMCANONCOLOR=0; RPMCANONARCH=sh4 ;;
++aarch64*)	RPMCANONCOLOR=2; RPMCANONARCH=aarch64 ;;
+ *)		RPMCANONCOLOR=0; RPMCANONARCH=unknown ;;
+ esac
+ case "${host_os_noversion}" in
+diff -ru rpm-4.9.1.2/configure.ac rpm-4.9.1.2-aarch64/configure.ac
+--- rpm-4.9.1.2/configure.ac	2013-12-30 14:20:07.000000000 +0000
++++ rpm-4.9.1.2-aarch64/configure.ac	2013-12-30 14:28:40.000000000 +0000
+@@ -819,6 +819,7 @@
+ m68k*)		RPMCANONCOLOR=0; RPMCANONARCH=m68k ;;
+ sh3*)		RPMCANONCOLOR=0; RPMCANONARCH=sh3 ;;
+ sh4*)		RPMCANONCOLOR=0; RPMCANONARCH=sh4 ;;
++aarch64*)	RPMCANONCOLOR=2; RPMCANONARCH=aarch64 ;;
+ *)		RPMCANONCOLOR=0; RPMCANONARCH=unknown ;;
+ esac
+ case "${host_os_noversion}" in
+diff -ru rpm-4.9.1.2/installplatform rpm-4.9.1.2-aarch64/installplatform
+--- rpm-4.9.1.2/installplatform	2013-12-30 14:20:07.000000000 +0000
++++ rpm-4.9.1.2-aarch64/installplatform	2013-12-30 14:28:40.000000000 +0000
+@@ -119,6 +119,10 @@
+ 	ISANAME=mips
+ 	ISABITS=32
+ 	;;
++    aarch64*)
++	ISANAME=aarch
++	ISABITS=64
++	;;
+   esac
+ 
+   case $VENDOR in
+Only in rpm-4.9.1.2-aarch64: installplatform.orig
+Only in rpm-4.9.1.2-aarch64: installplatform.rej
+diff -ru rpm-4.9.1.2/macros.in rpm-4.9.1.2-aarch64/macros.in
+--- rpm-4.9.1.2/macros.in	2013-12-30 14:20:07.000000000 +0000
++++ rpm-4.9.1.2-aarch64/macros.in	2013-12-30 14:29:33.000000000 +0000
+@@ -1034,6 +1034,9 @@
+ # arch macro for all supported ARM processors
+ %arm	armv3l armv4b armv4l armv4tl armv5tel armv5tejl armv6l armv7l armv7hl armv7nhl armv7tnhl armv7thl
+ 
++# arch macro for aarch64
++%aarch64       aarch64
++
+ #------------------------------------------------------------------------------
+ # arch macro for all supported Sparc processors
+ %sparc sparc sparcv8 sparcv9 sparcv9v sparc64 sparc64v
+Only in rpm-4.9.1.2-aarch64: macros.in.orig
+Only in rpm-4.9.1.2-aarch64: macros.in.rej
+diff -ru rpm-4.9.1.2/rpmrc.in rpm-4.9.1.2-aarch64/rpmrc.in
+--- rpm-4.9.1.2/rpmrc.in	2013-12-30 14:20:07.000000000 +0000
++++ rpm-4.9.1.2-aarch64/rpmrc.in	2013-12-30 14:28:40.000000000 +0000
+@@ -86,6 +86,8 @@
+ optflags: sh4 -O2 -g -mieee
+ optflags: sh4a -O2 -g -mieee
+ 
++optflags: aarch64 -O2 -g
++
+ #############################################################
+ # Canonical arch names and numbers
+ 
+@@ -172,6 +174,8 @@
+ arch_canon:	sh4: sh4	17
+ arch_canon:	sh4a: sh4a	17
+ arch_canon:	xtensa: xtensa	18
++arch_canon:	aarch64: aarch64	19
++
+ 
+ #############################################################
+ # Canonical OS names and numbers
+@@ -283,6 +287,8 @@
+ buildarchtranslate: sh4: sh4
+ buildarchtranslate: sh4a: sh4
+ 
++buildarchtranslate: aarch64: aarch64
++
+ #############################################################
+ # Architecture compatibility
+ 
+@@ -376,6 +382,8 @@
+ arch_compat: sh4: noarch
+ arch_compat: sh4a: sh4
+ 
++arch_compat: aarch64: noarch
++
+ os_compat:   IRIX64: IRIX
+ os_compat: solaris2.7: solaris2.3 solaris2.4 solaris2.5 solaris2.6
+ os_compat: solaris2.6: solaris2.3 solaris2.4 solaris2.5
+@@ -490,5 +498,7 @@
+ buildarch_compat: sh4: noarch
+ buildarch_compat: sh4a: sh4
+ 
++buildarch_compat: aarch64: noarch
++
+ # \endverbatim
+ #*/
+Only in rpm-4.9.1.2-aarch64: rpmrc.in.orig
