@@ -170,7 +170,7 @@ export CPPFLAGS CFLAGS LDFLAGS
 
 # Using configure macro has some unwanted side-effects on rpm platform
 # setup, use the old-fashioned way for now only defining minimal paths.
-autoreconf -i -f
+autoreconf
 
 ./configure \
     --prefix=%{_usr} \
