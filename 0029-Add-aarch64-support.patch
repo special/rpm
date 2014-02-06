@@ -1,0 +1,186 @@
+From 05a544bab9db596d4e41c1a9b35331b7078b0a4d Mon Sep 17 00:00:00 2001
+From: Oleg Girko <ol@infoserver.lv>
+Date: Thu, 6 Feb 2014 22:28:30 +0000
+Subject: [PATCH] Add aarch64 support.
+
+Signed-off-by: Oleg Girko <ol@infoserver.lv>
+---
+ config.guess    | 28 ++++++++++++++++++++++++++++
+ config.sub      |  2 ++
+ configure       |  1 +
+ configure.ac    |  1 +
+ installplatform |  4 ++++
+ macros.in       |  3 +++
+ rpmrc.in        | 10 ++++++++++
+ 7 files changed, 49 insertions(+)
+
+diff --git a/config.guess b/config.guess
+index dc84c68..7abf822 100755
+--- a/config.guess
++++ b/config.guess
+@@ -139,6 +139,27 @@ UNAME_RELEASE=`(uname -r) 2>/dev/null` || UNAME_RELEASE=unknown
+ UNAME_SYSTEM=`(uname -s) 2>/dev/null`  || UNAME_SYSTEM=unknown
+ UNAME_VERSION=`(uname -v) 2>/dev/null` || UNAME_VERSION=unknown
+ 
++case "${UNAME_SYSTEM}" in
++Linux|GNU|GNU/*)
++	# If the system lacks a compiler, then just pick glibc.
++	# We could probably try harder.
++	LIBC=gnu
++
++	eval $set_cc_for_build
++	cat <<-EOF > $dummy.c
++	#include <features.h>
++	#if defined(__UCLIBC__)
++	LIBC=uclibc
++	#elif defined(__dietlibc__)
++	LIBC=dietlibc
++	#else
++	LIBC=gnu
++	#endif
++	EOF
++	eval `$CC_FOR_BUILD -E $dummy.c 2>/dev/null | grep '^LIBC'`
++	;;
++esac
++
+ # Note: order is significant - the case branches are not exclusive.
+ 
+ case "${UNAME_MACHINE}:${UNAME_SYSTEM}:${UNAME_RELEASE}:${UNAME_VERSION}" in
+@@ -857,6 +878,13 @@ EOF
+     i*86:Minix:*:*)
+ 	echo ${UNAME_MACHINE}-pc-minix
+ 	exit ;;
++    aarch64:Linux:*:*)
++	echo ${UNAME_MACHINE}-unknown-linux-${LIBC}
++	exit ;;
++    aarch64_be:Linux:*:*)
++	UNAME_MACHINE=aarch64_be
++	echo ${UNAME_MACHINE}-unknown-linux-${LIBC}
++	exit ;;
+     alpha:Linux:*:*)
+ 	case `sed -n '/^cpu model/s/^.*: \(.*\)/\1/p' < /proc/cpuinfo` in
+ 	  EV5)   UNAME_MACHINE=alphaev5 ;;
+diff --git a/config.sub b/config.sub
+index 2a55a50..faa7cbb 100755
+--- a/config.sub
++++ b/config.sub
+@@ -245,6 +245,7 @@ case $basic_machine in
+ 	# Some are omitted here because they have special meanings below.
+ 	1750a | 580 \
+ 	| a29k \
++	| aarch64 | aarch64_be \
+ 	| alpha | alphaev[4-8] | alphaev56 | alphaev6[78] | alphapca5[67] \
+ 	| alpha64 | alpha64ev[4-8] | alpha64ev56 | alpha64ev6[78] | alpha64pca5[67] \
+ 	| am33_2.0 \
+@@ -327,6 +328,7 @@ case $basic_machine in
+ 	# Recognize the basic CPU types with company name.
+ 	580-* \
+ 	| a29k-* \
++	| aarch64-* | aarch64_be-* \
+ 	| alpha-* | alphaev[4-8]-* | alphaev56-* | alphaev6[78]-* \
+ 	| alpha64-* | alpha64ev[4-8]-* | alpha64ev56-* | alpha64ev6[78]-* \
+ 	| alphapca5[67]-* | alpha64pca5[67]-* | arc-* \
+diff --git a/configure b/configure
+index a12a5cd..bd44fef 100755
+--- a/configure
++++ b/configure
+@@ -24238,6 +24238,7 @@ mips*)		RPMCANONCOLOR=0; RPMCANONARCH=mips ;;
+ m68k*)		RPMCANONCOLOR=0; RPMCANONARCH=m68k ;;
+ sh3*)		RPMCANONCOLOR=0; RPMCANONARCH=sh3 ;;
+ sh4*)		RPMCANONCOLOR=0; RPMCANONARCH=sh4 ;;
++aarch64*)	RPMCANONCOLOR=2; RPMCANONARCH=aarch64 ;;
+ *)		RPMCANONCOLOR=0; RPMCANONARCH=unknown ;;
+ esac
+ case "${host_os_noversion}" in
+diff --git a/configure.ac b/configure.ac
+index 91fa3b1..7305b3d 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -819,6 +819,7 @@ mips*)		RPMCANONCOLOR=0; RPMCANONARCH=mips ;;
+ m68k*)		RPMCANONCOLOR=0; RPMCANONARCH=m68k ;;
+ sh3*)		RPMCANONCOLOR=0; RPMCANONARCH=sh3 ;;
+ sh4*)		RPMCANONCOLOR=0; RPMCANONARCH=sh4 ;;
++aarch64*)	RPMCANONCOLOR=2; RPMCANONARCH=aarch64 ;;
+ *)		RPMCANONCOLOR=0; RPMCANONARCH=unknown ;;
+ esac
+ case "${host_os_noversion}" in
+diff --git a/installplatform b/installplatform
+index 7a7fbbf..2111ddc 100755
+--- a/installplatform
++++ b/installplatform
+@@ -119,6 +119,10 @@ for SUBST in $SUBSTS ; do
+ 	ISANAME=mips
+ 	ISABITS=32
+ 	;;
++    aarch64*)
++	ISANAME=aarch
++	ISABITS=64
++	;;
+   esac
+ 
+   case $VENDOR in
+diff --git a/macros.in b/macros.in
+index 8f696e9..433e5bf 100644
+--- a/macros.in
++++ b/macros.in
+@@ -1034,6 +1034,9 @@ done \
+ # arch macro for all supported ARM processors
+ %arm	armv3l armv4b armv4l armv4tl armv5tel armv5tejl armv6l armv7l armv7hl armv7nhl armv7tnhl armv7thl
+ 
++# arch macro for aarch64
++%aarch64       aarch64
++
+ #------------------------------------------------------------------------------
+ # arch macro for all supported Sparc processors
+ %sparc sparc sparcv8 sparcv9 sparcv9v sparc64 sparc64v
+diff --git a/rpmrc.in b/rpmrc.in
+index 48f6a44..bae3d06 100644
+--- a/rpmrc.in
++++ b/rpmrc.in
+@@ -86,6 +86,8 @@ optflags: sh3 -O2 -g
+ optflags: sh4 -O2 -g -mieee
+ optflags: sh4a -O2 -g -mieee
+ 
++optflags: aarch64 -O2 -g
++
+ #############################################################
+ # Canonical arch names and numbers
+ 
+@@ -172,6 +174,8 @@ arch_canon:	sh3: sh3	17
+ arch_canon:	sh4: sh4	17
+ arch_canon:	sh4a: sh4a	17
+ arch_canon:	xtensa: xtensa	18
++arch_canon:	aarch64: aarch64	19
++
+ 
+ #############################################################
+ # Canonical OS names and numbers
+@@ -283,6 +287,8 @@ buildarchtranslate: sh3: sh3
+ buildarchtranslate: sh4: sh4
+ buildarchtranslate: sh4a: sh4
+ 
++buildarchtranslate: aarch64: aarch64
++
+ #############################################################
+ # Architecture compatibility
+ 
+@@ -376,6 +382,8 @@ arch_compat: sh3: noarch
+ arch_compat: sh4: noarch
+ arch_compat: sh4a: sh4
+ 
++arch_compat: aarch64: noarch
++
+ os_compat:   IRIX64: IRIX
+ os_compat: solaris2.7: solaris2.3 solaris2.4 solaris2.5 solaris2.6
+ os_compat: solaris2.6: solaris2.3 solaris2.4 solaris2.5
+@@ -490,5 +498,7 @@ buildarch_compat: sh3: noarch
+ buildarch_compat: sh4: noarch
+ buildarch_compat: sh4a: sh4
+ 
++buildarch_compat: aarch64: noarch
++
+ # \endverbatim
+ #*/
+-- 
+1.8.3.1
+
