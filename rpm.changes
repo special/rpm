@@ -1,3 +1,6 @@
+* Thu Feb 06 2014 Oleg Girko <oleg.girko@jolla.com> - 4.9.1.2-20
+- Add patch to replace -mno-thumb compiler option with -marm.
+
 * Mon Jan 27 2014 Oleg Girko <oleg.girko@jolla.com> - 4.9.1.2-19
 - Add aarch64 support.
 

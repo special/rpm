@@ -34,7 +34,8 @@ Patch24:	0024-add-new-dbi-flag-really_nodbsync.patch
 Patch25:	0025-macros-Support-noecho-macro-to-quieten-build-scriptl.patch
 Patch26:	0026-fix-rpmbuild-build-in-place-to-work-with-target-opti.patch
 Patch27:	0027-Implement-macro-to-skip-install-processing-step.patch
-Patch28:	rpm-aarch64-support.patch
+Patch28:	0028-Replace-mno-thumb-compiler-option-with-marm.patch
+Patch29:	rpm-aarch64-support.patch
 Group: System/Base
 Url: http://www.rpm.org/
 # See also https://github.com/mer-packages/rpm/
@@ -160,6 +161,7 @@ that will manipulate RPM packages and databases.
 %patch26 -p1
 %patch27 -p1
 %patch28 -p1
+%patch29 -p1
 
 %build
 CPPFLAGS="$CPPFLAGS `pkg-config --cflags nss`"

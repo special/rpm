@@ -1,0 +1,30 @@
+From bc363b6e1ef52813531ea3dbd9e377ed274ff8bc Mon Sep 17 00:00:00 2001
+From: Oleg Girko <ol@infoserver.lv>
+Date: Thu, 6 Feb 2014 21:35:37 +0000
+Subject: [PATCH 1/2] Replace -mno-thumb compiler option with -marm.
+
+The -mno-thumb option is not supported anymore by gcc 4.8.
+
+Signed-off-by: Oleg Girko <ol@infoserver.lv>
+---
+ rpmrc.in | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/rpmrc.in b/rpmrc.in
+index 9f1eaca..8dbe0d7 100644
+--- a/rpmrc.in
++++ b/rpmrc.in
+@@ -66,8 +66,8 @@ optflags: armv5tel -O2 -g -march=armv5te
+ optflags: armv5tejl -O2 -g -march=armv5te
+ optflags: armv6l -O2 -g -march=armv6
+ optflags: armv7l -O2 -g -march=armv7
+-optflags: armv7hl -O2 -g -march=armv7-a -mfloat-abi=hard -mfpu=vfpv3-d16 -mno-thumb
+-optflags: armv7nhl -O2 -g -march=armv7-a -mfloat-abi=hard -mfpu=neon -mno-thumb
++optflags: armv7hl -O2 -g -march=armv7-a -mfloat-abi=hard -mfpu=vfpv3-d16 -marm
++optflags: armv7nhl -O2 -g -march=armv7-a -mfloat-abi=hard -mfpu=neon -marm
+ optflags: armv7thl -O2 -g -march=armv7-a -mfloat-abi=hard -mfpu=vfpv3-d16 -mthumb
+ optflags: armv7tnhl -O2 -g -march=armv7-a -mfloat-abi=hard -mfpu=neon -mthumb
+ 
+-- 
+1.8.3.1
+
