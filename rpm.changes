@@ -1,3 +1,6 @@
+* Tue Dec 09 2014 Pasi Sjöholm <pasi.sjoholm@jollamobile.com> - 4.9.1.2-21
+- Fix CVE-2013-6435
+
 * Thu Feb 06 2014 Oleg Girko <oleg.girko@jolla.com> - 4.9.1.2-20
 - Add patch to replace -mno-thumb compiler option with -marm.
 - Add proper patch for aarch64 support.
