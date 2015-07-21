@@ -72,6 +72,8 @@ BuildRequires: bzip2-devel >= 0.9.0c-2
 BuildRequires: lua-devel >= 5.1
 BuildRequires: libcap-devel
 BuildRequires: xz-devel >= 4.999.8
+BuildRequires: libselinux-devel
+BuildRequires: libsemanage-devel
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
@@ -185,9 +187,10 @@ autoreconf
     --enable-python \
 %endif
     --with-lua \
-    --with-cap  
+    --with-cap \
+    --with-selinux
 
-make %{?jobs:-j%jobs}
+make %{?_smp_mflags}
 
 %install
 rm -rf $RPM_BUILD_ROOT
